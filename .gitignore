@@ -39,8 +39,6 @@ build/Release
 
 # Dependency directories
 node_modules/
-API/node_modules/
-client/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -72,7 +70,6 @@ typings/
 
 # dotenv environment variables file
 .env
-client/.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
