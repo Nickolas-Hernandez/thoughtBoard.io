@@ -7,7 +7,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { fontSize } from '@mui/system';
 
-const stylesGlobal = {
+const styles = {
   select: {
     borderColor: "white",
     backgroundColor: "white",
@@ -33,13 +33,13 @@ const dropDownMenuProps = {
 const ProjectSelector = () => {
 
   return (
-    <FormControl sx={stylesGlobal.formControl}>
+    <FormControl sx={styles.formControl}>
       <InputLabel sx={{color: "white", backgroundColor: '#2C2C31'}} id="project-selector">Select Project</InputLabel>
       <Select
       labelId="project-selector"
       id="project-selector"
       placeholder="Select Project"
-      IconComponent={() => <ArrowDropDownIcon sx={stylesGlobal.icon}/>}
+      IconComponent={() => <ArrowDropDownIcon sx={styles.icon}/>}
       MenuProps={dropDownMenuProps}
       // sx={stylesGlobal.select}
       >
