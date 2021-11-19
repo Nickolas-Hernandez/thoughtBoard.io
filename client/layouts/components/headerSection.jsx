@@ -1,15 +1,12 @@
 import React from "react";
-import Container from '@mui/material/Container';
 import Box from '@mui/material/box';
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import Button  from "@mui/material/button";
+import ProjectSelector from '../../components/projectSelector';
 
-export default function HeaderS() {
-  const theme = useTheme();
 
+const HeaderSection = () => {
   const boxStyle = {
-    backgroundColor: '#545F6A',
+    backgroundColor: '#2C2C31',
     color: '#FAF9F6',
     height: '90px',
     padding: '.5rem 1rem',
@@ -21,6 +18,8 @@ export default function HeaderS() {
   return (
     <Box sx={boxStyle}>
       <Typography variant='h2'>thoughtBoard.io</Typography>
+      <ProjectSelector />
     </Box>
   );
 }
+export default HeaderSection;
