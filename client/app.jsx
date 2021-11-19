@@ -1,9 +1,11 @@
 import React from 'react';
-import Header from './layouts/components/header';
+import HeaderSection from './layouts/components/headerSection';
 
 const App = () => {
   return (
-    <Header />
+    <>
+    <HeaderSection />
+    </>
   );
 }
 

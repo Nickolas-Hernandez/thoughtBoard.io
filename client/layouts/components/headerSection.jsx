@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Button  from "@mui/material/button";
 
-export default function () {
+export default function HeaderS() {
   const theme = useTheme();
 
   const boxStyle = {
