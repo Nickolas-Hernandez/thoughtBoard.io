@@ -9,14 +9,18 @@ export default function () {
   const theme = useTheme();
 
   const boxStyle = {
-    backgroundColor: "#545F6A",
+    backgroundColor: '#545F6A',
     color: '#FAF9F6',
-    padding: ".5rem 1rem"
+    height: '90px',
+    padding: '.5rem 1rem',
+    display: 'flex',
+    alignItems: 'flex-end',
+    borderBottom: '1px solid black'
   }
 
   return (
     <Box sx={boxStyle}>
-      <Typography variant="h2">thoughtBoard.io</Typography>
+      <Typography variant='h2'>thoughtBoard.io</Typography>
     </Box>
   );
 }
