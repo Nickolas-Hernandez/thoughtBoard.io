@@ -1,7 +1,12 @@
 import React from 'react';
+import HeaderSection from './layouts/components/headerSection';
 
 const App = () => {
-  return <h1>Hello World</h1>;
+  return (
+    <>
+    <HeaderSection />
+    </>
+  );
 }
 
 export default App;
