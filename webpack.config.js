@@ -23,6 +23,16 @@ module.exports = {
             plugins: ['@babel/plugin-transform-react-jsx']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {modules: true}
+          }
+        ]
       }
     ]
   },
