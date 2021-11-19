@@ -5,14 +5,20 @@ import MenuItem  from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { fontSize } from '@mui/system';
 
 const stylesGlobal = {
   select: {
     borderColor: "white",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   icon: {
     color: "white"
+  },
+  formControl: {
+    m: '1',
+    width: '250px',
+    fontSize: "1rem"
   }
 };
 
@@ -25,13 +31,9 @@ const dropDownMenuProps = {
 }
 
 const ProjectSelector = () => {
-  const styles = {
-    m: '1',
-    width: '250px',
-  }
 
   return (
-    <FormControl sx={styles}>
+    <FormControl sx={stylesGlobal.formControl}>
       <InputLabel sx={{color: "white", backgroundColor: '#2C2C31'}} id="project-selector">Select Project</InputLabel>
       <Select
       labelId="project-selector"
