@@ -40,7 +40,7 @@ const theme = createTheme({
       },
       body1: {
         fontFamily: "Source Sans Pro",
-        fontWeight: "400",
+        fontWeight: "300",
         fontSize: "1.2rem"
       },
       button: {
