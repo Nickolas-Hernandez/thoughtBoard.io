@@ -1,7 +1,7 @@
 import React from "react";
-import Box from '@mui/material/box';
-import Typography from "@mui/material/Typography";
+import { Box, Typography } from '@mui/material'
 import ProjectSelector from '../../components/projectSelector';
+import NewProjectButton from '../../components/newProjectButton';
 
 
 const HeaderSection = () => {
@@ -19,6 +19,7 @@ const HeaderSection = () => {
     <Box sx={boxStyle}>
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector />
+      <NewProjectButton />
     </Box>
   );
 }
