@@ -1,9 +1,5 @@
 import React from 'react';
-import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import MenuItem  from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import {Select, FormControl, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { fontSize } from '@mui/system';
 
@@ -19,6 +15,10 @@ const styles = {
     m: '1',
     width: '250px',
     fontSize: "1rem"
+  },
+  inputLabel: {
+    color: "white",
+    backgroundColor: '#2C2C31'
   }
 };
 
@@ -34,7 +34,7 @@ const ProjectSelector = () => {
 
   return (
     <FormControl sx={styles.formControl}>
-      <InputLabel sx={{color: "white", backgroundColor: '#2C2C31'}} id="project-selector">Select Project</InputLabel>
+      <InputLabel sx={styles.inputLabel} id="project-selector">Select Project</InputLabel>
       <Select
       labelId="project-selector"
       id="project-selector"
