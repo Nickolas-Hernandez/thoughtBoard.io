@@ -1,18 +1,24 @@
 import React from 'react';
-import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import MenuItem  from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import {Select, FormControl, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { fontSize } from '@mui/system';
 
-const stylesGlobal = {
+const styles = {
   select: {
     borderColor: "white",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   icon: {
     color: "white"
+  },
+  formControl: {
+    m: '1',
+    width: '250px',
+    fontSize: "1rem"
+  },
+  inputLabel: {
+    color: "white",
+    backgroundColor: '#2C2C31'
   }
 };
 
@@ -25,21 +31,17 @@ const dropDownMenuProps = {
 }
 
 const ProjectSelector = () => {
-  const styles = {
-    m: '1',
-    width: '250px',
-  }
 
   return (
-    <FormControl sx={styles}>
-      <InputLabel sx={{color: "white", backgroundColor: '#2C2C31'}} id="project-selector">Select Project</InputLabel>
+    <FormControl sx={styles.formControl}>
+      <InputLabel sx={styles.inputLabel} id="project-selector">Select Project</InputLabel>
       <Select
       labelId="project-selector"
       id="project-selector"
       placeholder="Select Project"
-      IconComponent={() => <ArrowDropDownIcon sx={stylesGlobal.icon}/>}
+      IconComponent={() => <ArrowDropDownIcon sx={styles.icon}/>}
       MenuProps={dropDownMenuProps}
-      // sx={stylesGlobal.select}
+      // sx={styles.select}
       >
         <MenuItem value="">None</MenuItem>
         <MenuItem value="Project">Project 1</MenuItem>
