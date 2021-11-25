@@ -41,7 +41,7 @@ const ProjectSelector = () => {
       placeholder="Select Project"
       IconComponent={() => <ArrowDropDownIcon sx={styles.icon}/>}
       MenuProps={dropDownMenuProps}
-      // sx={stylesGlobal.select}
+      // sx={styles.select}
       >
         <MenuItem value="">None</MenuItem>
         <MenuItem value="Project">Project 1</MenuItem>
