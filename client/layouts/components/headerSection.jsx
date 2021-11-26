@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Box, Typography } from '@mui/material'
 import ProjectSelector from '../../components/projectSelector';
 import NewProjectButton from '../../components/newProjectButton';
@@ -18,8 +18,30 @@ function HeaderSection(){
 
   const [ openNewProject, setOpenNewProject ] = useState(false);
 
-  function handleNewProject() {
-    setOpenNewProject(!openNewProject);
+  const intialState = {
+    displayNewProjectForm: 'false',
+    newProjectName: '',
+    currentProject: ''
+  };
+
+  const [ state, dispatch ] = useReducer(reducer, intialState);
+
+  function reducer(state, action) {
+    switch(action.type){
+      case 'handleForm':
+        return { ...state, displayNewProjectForm: !state.displayNewProjectForm};
+      case 'updateName':
+        return { ...state, newProjectName: action.payload.name}
+    }
+  }
+
+  function handleNewProject(e) {
+    e.preventDefault();
+    dispatch({type: 'handleForm'})
+  }
+
+  function submitProjectName(e, name){
+    dispatch({type: 'updateName', payload: {name: name}})
   }
 
   return (
@@ -27,7 +49,7 @@ function HeaderSection(){
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector />
       <NewProjectButton openNewProject={handleNewProject} />
-      <NewProjectForm />
+      {state.displayNewProjectForm ? <NewProjectForm submitProjectName={submitProjectName} /> : ''}
     </Box>
   );
 }
