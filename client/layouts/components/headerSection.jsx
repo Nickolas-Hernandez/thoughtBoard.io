@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from '@mui/material'
 import ProjectSelector from '../../components/projectSelector';
 import NewProjectButton from '../../components/newProjectButton';
+import NewProjectForm from '../../components/newProjectForm';
 
 
 function HeaderSection(){
@@ -26,6 +27,7 @@ function HeaderSection(){
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector />
       <NewProjectButton openNewProject={handleNewProject} />
+      <NewProjectForm />
     </Box>
   );
 }
