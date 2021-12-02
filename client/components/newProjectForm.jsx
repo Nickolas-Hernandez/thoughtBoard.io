@@ -15,11 +15,14 @@ const styles = {
   }
 }
 
-const NewProjectForm = () => {
+const NewProjectForm = (props) => {
   const [ value, setValue ] = useState('')
 
   return(
-    <Box component="form" sx={styles.form}>
+    <Box component="form" onSubmit={(e) => {
+      e.preventDefault();
+      props.submitNewProject(value);
+    }} sx={styles.form}>
       <TextField
       onChange={(e) => setValue(e.target.value)}
       value={value}

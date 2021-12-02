@@ -20,7 +20,6 @@ function HeaderSection(){
 
   const intialState = {
     displayNewProjectForm: 'false',
-    newProjectName: '',
     currentProject: ''
   };
 
@@ -30,8 +29,8 @@ function HeaderSection(){
     switch(action.type){
       case 'handleForm':
         return { ...state, displayNewProjectForm: !state.displayNewProjectForm};
-      case 'updateName':
-        return { ...state, newProjectName: action.payload.name}
+      case 'updateCurrentProject':
+        return { ...state, currentProject: action.payload.name}
     }
   }
 
@@ -40,8 +39,12 @@ function HeaderSection(){
     dispatch({type: 'handleForm'})
   }
 
-  function submitProjectName(e, name){
-    dispatch({type: 'updateName', payload: {name: name}})
+  function submitProjectName(name){
+    dispatch({type: 'updateCurrentProject', payload: {name: name}});
+    dispatch({type: 'handleForm'});
+    //SET HASHROUTE
+    //SAVE TO DB
+    //RESET AND HIDE FORM
   }
 
   return (
@@ -49,7 +52,7 @@ function HeaderSection(){
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector />
       <NewProjectButton openNewProject={handleNewProject} />
-      {state.displayNewProjectForm ? <NewProjectForm submitProjectName={submitProjectName} /> : ''}
+      {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </Box>
   );
 }
