@@ -19,7 +19,7 @@ function HeaderSection(){
   const [ openNewProject, setOpenNewProject ] = useState(false);
 
   const intialState = {
-    displayNewProjectForm: 'false',
+    displayNewProjectForm: false,
     currentProject: ''
   };
 
