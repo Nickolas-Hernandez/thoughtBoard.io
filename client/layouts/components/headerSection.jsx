@@ -39,11 +39,23 @@ function HeaderSection(){
     dispatch({type: 'handleForm'})
   }
 
-  function submitProjectName(name){
+  async function submitProjectName(name){
     dispatch({type: 'updateCurrentProject', payload: {name: name}});
     dispatch({type: 'handleForm'});
-    //SET HASHROUTE
+    try {
+      const init = {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({ projectName: state.currentProject })
+      }
+      const response = await fetch("/api/newProject", init);
+      const result = await response.json();
+      console.log(result);
+    } catch (err){
+      console.error(err);
+    }
     //SAVE TO DB
+    //SET HASHROUTE
     //RESET AND HIDE FORM
   }
 

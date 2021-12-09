@@ -17,8 +17,9 @@ const db = new pg.Pool({
 app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
-
-
+app.post("/api/newProject", (req, res, next ) => {
+  res.status(200).json({ message: "we made it!" })
+});
 
 app.use(errorMiddleware);
 
