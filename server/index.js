@@ -17,6 +17,10 @@ const db = new pg.Pool({
 app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
+app.get('/api/createUser', (req, res, next) => {
+
+});
+
 app.post("/api/newProject", (req, res, next ) => {
   console.log('body: ', req.body);
   res.status(200).json({ message: "we made it!" });
