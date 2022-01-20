@@ -5,22 +5,22 @@ drop schema "public" cascade;
 create schema "public";
 
 create table "users" (
-  "id"  serial,
+  "id" serial,
   primary key ("id")
 );
 
 create table "projects" (
-  "id"     serial,
-  "owner"  int not null,
-  "title"  text not null,
+  "id" serial,
+  "owner" integer not null,
+  "title" text not null,
   primary key ("id")
 );
 
 create table "notes" (
-  "id"      serial,
-  "project" int not null,
-  "title"   text not null,
-  "data"    text not null,
+  "id" serial,
+  "project" integer not null,
+  "title" text not null,
+  "data" text not null,
   "createdAt" timestamptz(6) not null default now(),
   "lastEdittedAt" text not null,
   primary key ("id")
