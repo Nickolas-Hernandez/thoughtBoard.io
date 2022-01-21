@@ -6,6 +6,7 @@ create schema "public";
 
 create table "users" (
   "id" serial,
+  "uuid" text not null,
   primary key ("id")
 );
 
