@@ -1,4 +1,5 @@
 require('dotenv/config');
+const { v4: uuidv4 } = require('uuid');
 
 const express = require('express');
 const app = express();
@@ -18,7 +19,9 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.get('/api/createUser', (req, res, next) => {
-
+  //generater usr + jwt
+  const uuid = uuidv4();
+  console.log('uuid: ', uuid);
 });
 
 app.post("/api/newProject", (req, res, next ) => {
