@@ -1,5 +1,6 @@
 require('dotenv/config');
 const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 
 const express = require('express');
 const app = express();
@@ -19,9 +20,24 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.get('/api/createUser', (req, res, next) => {
-  //generater usr + jwt
   const uuid = uuidv4();
   console.log('uuid: ', uuid);
+  const sql = `
+    insert into "users" ("uuid")
+           values ($1)
+    returning *;
+  `
+  const params = [ uuid ];
+  db.query(sql, params)
+    .then(result => {
+      const newUser = result.rows[0];
+      console.log('newUser', newUser);
+      const token = jwt.sign({ id: newUser.id }, newUser.uuid);
+      console.log("token: ", token);
+      payload = { userId: newUser.id}
+      res.status(200).json({token: token, payload: payload});
+    })
+    .catch(err => next(err));
 });
 
 app.post("/api/newProject", (req, res, next ) => {
