@@ -42,7 +42,16 @@ app.get('/api/createUser', (req, res, next) => {
 
 app.post("/api/newProject", (req, res, next ) => {
   const { projectName, owner } = req.body;
-  res.status(200).json({ message: "we made it!" });
+  const sql = `
+    insert into "projects" ("title", "owner")
+          values ($1, $2)
+    returning *;
+  `
+  const params = [ projectName, owner ];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json({ project: result.rows[0] });
+  });
 });
 
 app.use(errorMiddleware);
