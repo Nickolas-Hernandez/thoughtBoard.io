@@ -7,19 +7,23 @@ const App = () => {
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    if(token) {
+      const userInfo = parseToken(token);
+      setUser(userInfo);
+      return;
+    }
     const fetchToken = async () => {
-      const user = token ? parseToken(token) : await createToken();
-      console.log(user);
-      const parsedToken = await parseToken(user);
-      console.log('parsedToken: ', parsedToken);
+      const newToken = await createToken();
+      const newUser = parseToken(newToken)
+      window.localStorage.setItem('token', newToken);
+      setUser(newUser);
     }
     fetchToken();
-
-  });
+  }, []);
 
   return (
     <>
-    <HeaderSection />
+    <HeaderSection user={user} />
     </>
   );
 }

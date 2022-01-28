@@ -5,7 +5,7 @@ import NewProjectButton from '../../components/newProjectButton';
 import NewProjectForm from '../../components/newProjectForm';
 
 
-function HeaderSection(){
+function HeaderSection(props){
   const boxStyle = {
     backgroundColor: '#2C2C31',
     color: '#FAF9F6',
@@ -46,7 +46,10 @@ function HeaderSection(){
       const init = {
         method: "POST",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({ projectName: state.currentProject })
+        body: JSON.stringify({
+          projectName: name,
+          owner: props.user.id
+        })
       }
       const response = await fetch("/api/newProject", init);
       const result = await response.json();
