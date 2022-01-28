@@ -9,7 +9,7 @@ const App = () => {
     const token = window.localStorage.getItem("token");
     if(token) {
       const userInfo = parseToken(token);
-      setUser(userInfo);  // fix this
+      setUser(userInfo);
       return;
     }
     const fetchToken = async () => {
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-    <HeaderSection />
+    <HeaderSection user={user} />
     </>
   );
 }
