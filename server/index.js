@@ -21,7 +21,6 @@ app.use(staticMiddleware);
 
 app.get('/api/createUser', (req, res, next) => {
   const uuid = uuidv4();
-  console.log('uuid: ', uuid);
   const sql = `
     insert into "users" ("uuid")
            values ($1)
@@ -31,9 +30,7 @@ app.get('/api/createUser', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const newUser = result.rows[0];
-      console.log('newUser', newUser);
       const token = jwt.sign({ id: newUser.id }, newUser.uuid);
-      console.log("token: ", token);
       payload = { userId: newUser.id}
       res.status(200).json({token: token, payload: payload});
     })
