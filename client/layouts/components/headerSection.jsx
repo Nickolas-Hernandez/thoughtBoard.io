@@ -57,9 +57,6 @@ function HeaderSection(props){
     } catch (err){
       console.error(err);
     }
-    //SAVE TO DB
-    //SET HASHROUTE
-    //RESET AND HIDE FORM
   }
 
   return (
