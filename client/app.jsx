@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { parseToken, createToken } from './lib'
-import HeaderSection from './layouts/components/headerSection';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/landing';
+import ThoughtBoard from './pages/thoughtBoard';
 
 const App = () => {
-  const [ user, setUser ] = useState(null);
-
-  useEffect(() => {
-    const token = window.localStorage.getItem("token");
-    if(token) {
-      const userInfo = parseToken(token);
-      setUser(userInfo);
-      return;
-    }
-    const fetchToken = async () => {
-      const newToken = await createToken();
-      const newUser = parseToken(newToken)
-      window.localStorage.setItem('token', newToken);
-      setUser(newUser);
-    }
-    fetchToken();
-  }, []);
-
   return (
-    <>
-    <HeaderSection user={user} />
-    </>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="thought-board" element={<ThoughtBoard />} />
+    </Routes>
   );
 }
 
