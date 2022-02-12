@@ -13,7 +13,7 @@ const errorMiddleware = require('./error-middleware');
 
 const pg = require('pg');
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL
 });
 
 app.use(jsonMiddleware);
@@ -25,30 +25,45 @@ app.get('/api/createUser', (req, res, next) => {
     insert into "users" ("uuid")
            values ($1)
     returning *;
-  `
+  `;
   const params = [ uuid ];
   db.query(sql, params)
     .then(result => {
       const newUser = result.rows[0];
       const token = jwt.sign({ id: newUser.id }, newUser.uuid);
-      payload = { userId: newUser.id}
-      res.status(200).json({token: token, payload: payload});
+      const payload = { userId: newUser.id };
+      res.status(200).json({ token: token, payload: payload });
     })
     .catch(err => next(err));
 });
 
-app.post("/api/newProject", (req, res, next ) => {
+app.get('/api/userProjects/:userId', (req, res, next) => {
+  const user = req.params.userId;
+  const projectQuery = `
+    select "id",
+           "title"
+      from "projects"
+      where "owner" = $1;
+  `;
+  const params = [ user ];
+  db.query(projectQuery, params)
+    .then(projects => {
+      res.status(200).json(projects.rows);
+    });
+});
+
+app.post('/api/newProject', (req, res, next) => {
   const { projectName, owner } = req.body;
   const sql = `
     insert into "projects" ("title", "owner")
           values ($1, $2)
     returning *;
-  `
+  `;
   const params = [ projectName, owner ];
   db.query(sql, params)
     .then(result => {
       res.status(200).json({ project: result.rows[0] });
-  });
+    });
 });
 
 app.use(errorMiddleware);
@@ -56,4 +71,4 @@ app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`http server listening on port ${process.env.PORT}`);
-})
+});
