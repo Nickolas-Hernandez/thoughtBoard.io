@@ -1,11 +1,10 @@
-import React, { useState, useReducer } from "react";
-import { Box, Typography } from '@mui/material'
+import React, { useReducer } from 'react';
+import { Box, Typography } from '@mui/material';
 import ProjectSelector from '../../components/projectSelector';
 import NewProjectButton from '../../components/newProjectButton';
 import NewProjectForm from '../../components/newProjectForm';
 
-
-function HeaderSection(props){
+function HeaderSection(props) {
   const boxStyle = {
     backgroundColor: '#2C2C31',
     color: '#FAF9F6',
@@ -14,9 +13,7 @@ function HeaderSection(props){
     display: 'flex',
     alignItems: 'flex-end',
     borderBottom: '1px solid black'
-  }
-
-  const [ openNewProject, setOpenNewProject ] = useState(false);
+  };
 
   const intialState = {
     displayNewProjectForm: false,
@@ -26,35 +23,35 @@ function HeaderSection(props){
   const [ state, dispatch ] = useReducer(reducer, intialState);
 
   function reducer(state, action) {
-    switch(action.type){
+    switch (action.type) {
       case 'handleForm':
-        return { ...state, displayNewProjectForm: !state.displayNewProjectForm};
+        return { ...state, displayNewProjectForm: !state.displayNewProjectForm };
       case 'updateCurrentProject':
-        return { ...state, currentProject: action.payload.name}
+        return { ...state, currentProject: action.payload.name };
     }
   }
 
   function handleNewProject(e) {
     e.preventDefault();
-    dispatch({type: 'handleForm'})
+    dispatch({ type: 'handleForm' });
   }
 
-  async function submitProjectName(name){
-    dispatch({type: 'updateCurrentProject', payload: {name: name}});
-    dispatch({type: 'handleForm'});
+  async function submitProjectName(name) {
+    dispatch({ type: 'updateCurrentProject', payload: { name: name } });
+    dispatch({ type: 'handleForm' });
     try {
       const init = {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           projectName: name,
           owner: props.user.id
         })
-      }
-      const response = await fetch("/api/newProject", init);
+      };
+      const response = await fetch('/api/newProject', init);
       const result = await response.json();
-      console.log(result);
-    } catch (err){
+      props.setProject(result);
+    } catch (err) {
       console.error(err);
     }
   }

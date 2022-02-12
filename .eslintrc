@@ -4,11 +4,18 @@
     "node": true,
     "browser": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+   }
+  },
   "extends": [
-    "plugin:react/recommended",
     "eslint:recommended",
-    "standard"
+    "plugin:react/recommended",
+    "standard",
+    "plugin:react-hooks/recommended"
   ],
   "settings": {
     "react": {
@@ -16,6 +23,10 @@
     }
   },
   "rules": {
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
     "semi": [
       "error",
       "always"

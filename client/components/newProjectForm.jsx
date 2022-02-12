@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, FormLabel, TextField, Button, Box } from '@mui/material';
-import { style } from '@mui/system';
+import { TextField, Button, Box } from '@mui/material';
 
 const styles = {
   form: {
@@ -13,21 +12,21 @@ const styles = {
   textField: {
     color: 'white'
   }
-}
+};
 
-const NewProjectForm = (props) => {
-  const [ value, setValue ] = useState('')
+const NewProjectForm = props => {
+  const [ value, setValue ] = useState('');
 
-  return(
+  return (
     <Box
     component="form"
-    onSubmit={(e) => {
+    onSubmit={e => {
       e.preventDefault();
       props.submitNewProject(value);
     }}
     sx={styles.form}>
       <TextField
-      onChange={(e) => setValue(e.target.value)}
+      onChange={e => setValue(e.target.value)}
       value={value}
       sx={styles.textField}
       label="Project Name"
