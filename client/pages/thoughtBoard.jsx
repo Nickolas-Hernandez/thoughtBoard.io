@@ -4,6 +4,7 @@ import HeaderSection from '../layouts/components/headerSection';
 
 const ThoughtBoard = () => {
   const [ user, setUser ] = useState(null);
+  const [ project, setProject ] = useState(null);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -21,8 +22,12 @@ const ThoughtBoard = () => {
     fetchToken();
   }, []);
 
+  const setProject = (projectName) => {
+    setProject(projectName);
+  }
+
   return (
-    <HeaderSection user={user} />
+    <HeaderSection user={user} setProject={setProject}/>
   );
 }
 
