@@ -50,7 +50,7 @@ function HeaderSection(props) {
       };
       const response = await fetch('/api/newProject', init);
       const result = await response.json();
-      console.log(result);
+      props.setProject(result);
     } catch (err) {
       console.error(err);
     }
