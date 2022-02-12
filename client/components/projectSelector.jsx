@@ -1,23 +1,22 @@
 import React from 'react';
-import {Select, FormControl, MenuItem, InputLabel, OutlinedInput} from '@mui/material';
+import { Select, FormControl, MenuItem, InputLabel } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { fontSize } from '@mui/system';
 
 const styles = {
   select: {
-    borderColor: "white",
-    backgroundColor: "white",
+    borderColor: 'white',
+    backgroundColor: 'white'
   },
   icon: {
-    color: "white"
+    color: 'white'
   },
   formControl: {
     m: '1',
     width: '250px',
-    fontSize: "1rem"
+    fontSize: '1rem'
   },
   inputLabel: {
-    color: "white",
+    color: 'white',
     backgroundColor: '#2C2C31'
   }
 };
@@ -25,10 +24,10 @@ const styles = {
 const dropDownMenuProps = {
   MenuListProps: {
     sx: {
-      backgroundColor: "black",
+      backgroundColor: 'black'
     }
   }
-}
+};
 
 const ProjectSelector = () => {
 
@@ -49,6 +48,6 @@ const ProjectSelector = () => {
       </Select>
     </FormControl>
   );
-}
+};
 
 export default ProjectSelector;
