@@ -5,9 +5,9 @@ const LandingPage = () => {
   return (
     <>
       <h1>This Is Big Beefy Landing Page</h1>
-      <Link to="/thought-board">Go To Projects -></Link>
+      <Link to="/thought-board">Go To Projects -&gt;</Link>
     </>
   );
-}
+};
 
 export default LandingPage;
