@@ -10,6 +10,6 @@ const App = () => {
       <Route path="thought-board" element={<ThoughtBoard />} />
     </Routes>
   );
-}
+};
 
 export default App;
