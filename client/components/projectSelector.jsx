@@ -29,8 +29,18 @@ const dropDownMenuProps = {
   }
 };
 
-const ProjectSelector = () => {
+const ProjectSelector = props => {
+  const { projects } = props;
+  console.log('selector projects: ', projects);
 
+  let menuItems;
+  if (projects === null) {
+    menuItems = null;
+  } else {
+    menuItems = projects.map(project => {
+      return <MenuItem value={project.title} key={project.id}>{project.title}</MenuItem>;
+    });
+  }
   return (
     <FormControl sx={styles.formControl}>
       <InputLabel sx={styles.inputLabel} id="project-selector">Select Project</InputLabel>
@@ -42,9 +52,7 @@ const ProjectSelector = () => {
       MenuProps={dropDownMenuProps}
       // sx={styles.select}
       >
-        <MenuItem value="">None</MenuItem>
-        <MenuItem value="Project">Project 1</MenuItem>
-        <MenuItem value="Project-2">Project 2</MenuItem>
+        { menuItems }
       </Select>
     </FormControl>
   );

@@ -15,8 +15,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "standard",
-    "plugin:react-hooks/recommended",
-    "plugin:transform-react-jsx"
+    "plugin:react-hooks/recommended"
   ],
   "settings": {
     "react": {

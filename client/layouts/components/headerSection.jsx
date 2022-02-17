@@ -59,7 +59,7 @@ function HeaderSection(props) {
   return (
     <Box sx={boxStyle}>
       <Typography variant='h2'>thoughtBoard.io</Typography>
-      <ProjectSelector />
+      <ProjectSelector projects={props.projects} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </Box>
