@@ -1,19 +1,11 @@
 import React, { useReducer } from 'react';
-import { Box, Typography } from '@mui/material';
-import ProjectSelector from '../../components/projectSelector';
-import NewProjectButton from '../../components/newProjectButton';
-import NewProjectForm from '../../components/newProjectForm';
+import { Typography } from '@mui/material';
+import ProjectSelector from '../../projectSelector';
+import NewProjectButton from '../../newProjectButton';
+import NewProjectForm from '../../newProjectForm';
+import HeaderContainer from './headerStyles';
 
 function HeaderSection(props) {
-  const boxStyle = {
-    backgroundColor: '#2C2C31',
-    color: '#FAF9F6',
-    height: '90px',
-    padding: '.5rem 1rem',
-    display: 'flex',
-    alignItems: 'flex-end',
-    borderBottom: '1px solid black'
-  };
 
   const intialState = {
     displayNewProjectForm: false,
@@ -54,7 +46,6 @@ function HeaderSection(props) {
       };
       const response = await fetch('/api/newProject', init);
       const result = await response.json();
-      console.log('result: ', result);
       props.appendProject(result.project);
       props.setProject(result.project);
     } catch (err) {
@@ -63,12 +54,13 @@ function HeaderSection(props) {
   }
 
   return (
-    <Box sx={boxStyle}>
+    <HeaderContainer>
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector projects={props.projects} selectProject={selectProject} selectedProject={state.currentProject} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
-    </Box>
+    </HeaderContainer>
   );
 }
+
 export default HeaderSection;
