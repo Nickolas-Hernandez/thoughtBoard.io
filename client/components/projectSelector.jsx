@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Select, FormControl, MenuItem, InputLabel } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
@@ -31,8 +31,6 @@ const dropDownMenuProps = {
 
 function ProjectSelector(props) {
   const { projects } = props;
-  const [ selectedProject, setSelected ] = useState('');
-  console.log('selected project: : ', selectedProject);
 
   let menuItems;
   if (projects === null) {
@@ -43,22 +41,17 @@ function ProjectSelector(props) {
     });
   }
 
-  const updateProject = event => {
-    setSelected(event.target.value);
-  };
-
   return (
     <FormControl sx={styles.formControl}>
       <InputLabel sx={styles.inputLabel} id="project-selector">Select Project</InputLabel>
       <Select
-      labelId="project-selector"
+      labelId="project-selector-label"
       id="project-selector"
       placeholder="Select Project"
       IconComponent={() => <ArrowDropDownIcon sx={styles.icon}/>}
       MenuProps={dropDownMenuProps}
-      value={selectedProject || ''}
-      onChange={updateProject}
-      // sx={styles.select}
+      value={props.selectedProject || ''}
+      onChange={props.selectProject}
       >
         { menuItems }
       </Select>

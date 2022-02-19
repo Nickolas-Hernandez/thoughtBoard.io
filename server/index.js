@@ -57,7 +57,7 @@ app.post('/api/newProject', (req, res, next) => {
   const sql = `
     insert into "projects" ("title", "owner")
           values ($1, $2)
-    returning *;
+    returning "id", "title";
   `;
   const params = [ projectName, owner ];
   db.query(sql, params)

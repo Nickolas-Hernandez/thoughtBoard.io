@@ -36,6 +36,10 @@ function HeaderSection(props) {
     dispatch({ type: 'handleForm' });
   }
 
+  function selectProject(e) {
+    dispatch({ type: 'updateCurrentProject', payload: { name: e.target.value } });
+  }
+
   async function submitProjectName(name) {
     dispatch({ type: 'updateCurrentProject', payload: { name: name } });
     dispatch({ type: 'handleForm' });
@@ -50,7 +54,9 @@ function HeaderSection(props) {
       };
       const response = await fetch('/api/newProject', init);
       const result = await response.json();
-      props.setProject(result);
+      console.log('result: ', result);
+      props.appendProject(result.project);
+      props.setProject(result.project);
     } catch (err) {
       console.error(err);
     }
@@ -59,7 +65,7 @@ function HeaderSection(props) {
   return (
     <Box sx={boxStyle}>
       <Typography variant='h2'>thoughtBoard.io</Typography>
-      <ProjectSelector projects={props.projects} />
+      <ProjectSelector projects={props.projects} selectProject={selectProject} selectedProject={state.currentProject} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </Box>
