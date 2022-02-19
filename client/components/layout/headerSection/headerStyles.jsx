@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 
-const HeaderContainer = styled(Box)({
+const StyledHeader = styled(Box)({
   backgroundColor: '#2C2C31',
   color: '#FAF9F6',
   height: '90px',
@@ -11,4 +11,4 @@ const HeaderContainer = styled(Box)({
   borderBottom: '1px solid black'
 });
 
-export default HeaderContainer;
+export default StyledHeader;

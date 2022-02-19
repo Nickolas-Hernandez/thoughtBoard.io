@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
-import HeaderContainer from './headerStyles';
+import StyledHeader from './headerStyles';
 
 function HeaderSection(props) {
 
@@ -54,12 +54,12 @@ function HeaderSection(props) {
   }
 
   return (
-    <HeaderContainer>
+    <StyledHeader>
       <Typography variant='h2'>thoughtBoard.io</Typography>
       <ProjectSelector projects={props.projects} selectProject={selectProject} selectedProject={state.currentProject} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
-    </HeaderContainer>
+    </StyledHeader>
   );
 }
 
