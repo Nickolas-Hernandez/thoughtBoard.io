@@ -1,25 +1,11 @@
 import React from 'react';
-import { Select, FormControl, MenuItem, InputLabel } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-const styles = {
-  select: {
-    borderColor: 'white',
-    backgroundColor: 'white'
-  },
-  icon: {
-    color: 'white'
-  },
-  formControl: {
-    m: '1',
-    width: '250px',
-    fontSize: '1rem'
-  },
-  inputLabel: {
-    color: 'white',
-    backgroundColor: '#2C2C31'
-  }
-};
+import { MenuItem } from '@mui/material';
+import {
+  SytledProjSelector,
+  StyledLabel,
+  StyledSelect,
+  StyledIcon
+} from './projSelectorStyles';
 
 const dropDownMenuProps = {
   MenuListProps: {
@@ -42,20 +28,20 @@ function ProjectSelector(props) {
   }
 
   return (
-    <FormControl sx={styles.formControl}>
-      <InputLabel sx={styles.inputLabel} id="project-selector">Select Project</InputLabel>
-      <Select
+    <SytledProjSelector>
+      <StyledLabel id="project-selector">Select Project</StyledLabel>
+      <StyledSelect
       labelId="project-selector-label"
       id="project-selector"
       placeholder="Select Project"
-      IconComponent={() => <ArrowDropDownIcon sx={styles.icon}/>}
+      IconComponent={() => <StyledIcon />}
       MenuProps={dropDownMenuProps}
       value={props.selectedProject || ''}
       onChange={props.selectProject}
       >
         { menuItems }
-      </Select>
-    </FormControl>
+      </StyledSelect>
+    </SytledProjSelector>
   );
 }
 
