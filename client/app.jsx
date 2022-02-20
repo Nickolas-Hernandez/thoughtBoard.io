@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/landing';
-import ThoughtBoard from './pages/thoughtBoard';
+import LandingPage from './views/landing';
+import ThoughtBoard from './views/thoughtBoard';
 
 const App = () => {
   return (

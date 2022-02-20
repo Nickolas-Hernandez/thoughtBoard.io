@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { parseToken, createToken } from '../lib';
-import HeaderSection from '../layouts/components/headerSection';
+import HeaderSection from '../components/layout/headerSection';
 
 const ThoughtBoard = () => {
   const [ user, setUser ] = useState(null);
@@ -30,12 +30,14 @@ const ThoughtBoard = () => {
     setUserProjects(projectData);
   };
 
-  console.log('user: ', user);
-  console.log('current proj: ', currentProject);
-  console.log('user projects: ', userProjects);
+  const appendProject = newProject => {
+    setUserProjects(projects => {
+      return [ ...projects, newProject ];
+    });
+  };
 
   return (
-    <HeaderSection user={user} setProject={setProject} projects={userProjects}/>
+    <HeaderSection user={user} setProject={setProject} projects={userProjects} appendProject={appendProject}/>
   );
 };
 
