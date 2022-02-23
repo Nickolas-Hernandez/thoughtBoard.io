@@ -4,16 +4,9 @@ import {
   SytledProjSelector,
   StyledLabel,
   StyledSelect,
-  StyledIcon
+  StyledIcon,
+  MenuProps
 } from './projSelectorStyles';
-
-const dropDownMenuProps = {
-  MenuListProps: {
-    sx: {
-      backgroundColor: 'black'
-    }
-  }
-};
 
 function ProjectSelector(props) {
   const { projects } = props;
@@ -35,7 +28,7 @@ function ProjectSelector(props) {
       id="project-selector"
       placeholder="Select Project"
       IconComponent={() => <StyledIcon />}
-      MenuProps={dropDownMenuProps}
+      MenuProps={MenuProps}
       value={props.selectedProject || ''}
       onChange={props.selectProject}
       >

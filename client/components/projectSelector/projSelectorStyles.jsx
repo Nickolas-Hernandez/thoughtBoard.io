@@ -21,9 +21,18 @@ const StyledIcon = styled(ArrowDropDownIcon)({
   color: 'white'
 });
 
+const MenuProps = {
+  PaperProps: {
+    style: {
+      backgroundColor: 'black'
+    }
+  }
+};
+
 export {
   SytledProjSelector,
   StyledLabel,
   StyledSelect,
-  StyledIcon
+  StyledIcon,
+  MenuProps
 };
