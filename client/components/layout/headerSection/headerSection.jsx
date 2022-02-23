@@ -5,34 +5,34 @@ import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import StyledHeader from './headerStyles';
 
-function HeaderSection(props) {
+const HeaderSection = props => {
 
   const intialState = {
     displayNewProjectForm: false,
     currentProject: ''
   };
 
-  const [ state, dispatch ] = useReducer(reducer, intialState);
-
-  function reducer(state, action) {
+  const reducer = (state, action) => {
     switch (action.type) {
       case 'handleForm':
         return { ...state, displayNewProjectForm: !state.displayNewProjectForm };
       case 'updateCurrentProject':
         return { ...state, currentProject: action.payload.name };
     }
-  }
+  };
 
-  function handleNewProject(e) {
-    e.preventDefault();
+  const [ state, dispatch ] = useReducer(reducer, intialState);
+
+  const handleNewProject = event => {
+    event.preventDefault();
     dispatch({ type: 'handleForm' });
-  }
+  };
 
-  function selectProject(e) {
-    dispatch({ type: 'updateCurrentProject', payload: { name: e.target.value } });
-  }
+  const selectProject = event => {
+    dispatch({ type: 'updateCurrentProject', payload: { name: event.target.value } });
+  };
 
-  async function submitProjectName(name) {
+  const submitProjectName = async name => {
     dispatch({ type: 'updateCurrentProject', payload: { name: name } });
     dispatch({ type: 'handleForm' });
     try {
@@ -51,7 +51,7 @@ function HeaderSection(props) {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <StyledHeader>
@@ -61,6 +61,6 @@ function HeaderSection(props) {
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </StyledHeader>
   );
-}
+};
 
 export default HeaderSection;
