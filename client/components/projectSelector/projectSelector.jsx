@@ -8,7 +8,7 @@ import {
   MenuProps
 } from './projSelectorStyles';
 
-function ProjectSelector(props) {
+const ProjectSelector = props => {
   const { projects } = props;
 
   let menuItems;
@@ -36,6 +36,6 @@ function ProjectSelector(props) {
       </StyledSelect>
     </SytledProjSelector>
   );
-}
+};
 
 export default ProjectSelector;
