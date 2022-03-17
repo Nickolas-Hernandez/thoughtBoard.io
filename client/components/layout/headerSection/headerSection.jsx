@@ -15,8 +15,6 @@ const HeaderSection = props => {
     currentProject: ''
   };
 
-  console.log('initial state: ', initialState);
-
   const reducer = (state, action) => {
     switch (action.type) {
       case 'handleForm':
