@@ -10,7 +10,7 @@ module.exports = {
     path: serverPublicPath
   },
   resolve: {
-    extensions: [ '.js', '.jsx']
+    extensions: [ '.js', '.jsx' ]
   },
   module: {
     rules: [
@@ -20,7 +20,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: ['@babel/plugin-transform-react-jsx']
+            plugins: [ '@babel/plugin-transform-react-jsx' ]
           }
         }
       },
@@ -30,7 +30,7 @@ module.exports = {
           { loader: 'style-loader' },
           {
             loader: 'css-loader',
-            options: {modules: true}
+            options: { modules: true }
           }
         ]
       }
@@ -38,6 +38,7 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
+    historyApiFallback: true,
     host: '0.0.0.0',
     port: process.env.DEV_SERVER_PORT,
     static: {
@@ -46,7 +47,7 @@ module.exports = {
     },
     watchFiles: [ serverPublicPath ],
     proxy: {
-      '/api': `http://localhost:${process.env.PORT}`,
+      '/api': `http://localhost:${process.env.PORT}`
     }
   },
   performance: {

@@ -1,13 +1,16 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import StyledHeader from './headerStyles';
+import { UserContext } from '../../../lib';
 
 const HeaderSection = props => {
+  const userContext = useContext(UserContext);
+  const { user, setCurrent, appendProject } = userContext;
 
-  const intialState = {
+  const initialState = {
     displayNewProjectForm: false,
     currentProject: ''
   };
@@ -21,7 +24,7 @@ const HeaderSection = props => {
     }
   };
 
-  const [ state, dispatch ] = useReducer(reducer, intialState);
+  const [ state, dispatch ] = useReducer(reducer, initialState);
 
   const handleNewProject = event => {
     event.preventDefault();
@@ -41,13 +44,13 @@ const HeaderSection = props => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           projectName: name,
-          owner: props.user.id
+          owner: user.id
         })
       };
       const response = await fetch('/api/newProject', init);
       const result = await response.json();
-      props.appendProject(result.project);
-      props.setProject(result.project);
+      appendProject(result.project);
+      setCurrent(result.project.title);
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +59,7 @@ const HeaderSection = props => {
   return (
     <StyledHeader>
       <Typography variant='h2'>thoughtBoard.io</Typography>
-      <ProjectSelector projects={props.projects} selectProject={selectProject} selectedProject={state.currentProject} />
+      <ProjectSelector selectProject={selectProject} selectedProject={state.currentProject} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </StyledHeader>
