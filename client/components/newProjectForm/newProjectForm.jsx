@@ -6,8 +6,8 @@ const NewProjectForm = props => {
   const [ value, setValue ] = useState('');
 
   return (
-    <StyledForm component='form' onSubmit={e => {
-      e.preventDefault();
+    <StyledForm component='form' onSubmit={event => {
+      event.preventDefault();
       props.submitNewProject(value);
     }}>
       <StyledInput

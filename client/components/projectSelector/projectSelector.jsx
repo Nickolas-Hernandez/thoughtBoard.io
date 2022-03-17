@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MenuItem } from '@mui/material';
+import { UserContext } from '../../lib';
 import {
   SytledProjSelector,
   StyledLabel,
@@ -9,17 +10,14 @@ import {
 } from './projSelectorStyles';
 
 const ProjectSelector = props => {
-  const { projects } = props;
-
-  let menuItems;
-  if (projects === null) {
-    menuItems = null;
-  } else {
+  const userContext = useContext(UserContext);
+  const { projects, currentProject } = userContext;
+  let menuItems = null;
+  if (projects) {
     menuItems = projects.map(project => {
       return <MenuItem value={project.title} key={project.id}>{project.title}</MenuItem>;
     });
   }
-
   return (
     <SytledProjSelector>
       <StyledLabel id="project-selector">Select Project</StyledLabel>
@@ -29,8 +27,8 @@ const ProjectSelector = props => {
       placeholder="Select Project"
       IconComponent={() => <StyledIcon />}
       MenuProps={MenuProps}
-      value={props.selectedProject || ''}
-      onChange={props.selectProject}
+      value={currentProject || ''}
+      onChange={event => userContext.setCurrent(event.target.value)}
       >
         { menuItems }
       </StyledSelect>
