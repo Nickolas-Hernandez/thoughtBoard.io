@@ -8,7 +8,7 @@ const app = express();
 const jsonMiddleware = express.json();
 const staticMiddleware = require('./static-middleware');
 
-const clientError = require('./client-error');
+const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 
 const pg = require('pg');
@@ -39,6 +39,9 @@ app.get('/api/createUser', (req, res, next) => {
 
 app.get('/api/userProjects/:userId', (req, res, next) => {
   const user = req.params.userId;
+  if (!user) {
+    throw new ClientError(400, 'Missing user ID');
+  }
   const projectQuery = `
     select "id",
            "title"
@@ -49,11 +52,15 @@ app.get('/api/userProjects/:userId', (req, res, next) => {
   db.query(projectQuery, params)
     .then(projects => {
       res.status(200).json(projects.rows);
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.post('/api/newProject', (req, res, next) => {
   const { projectName, owner } = req.body;
+  if (!projectName || !owner) {
+    throw new ClientError(400, 'Project name and project owner are required field');
+  }
   const sql = `
     insert into "projects" ("title", "owner")
           values ($1, $2)
