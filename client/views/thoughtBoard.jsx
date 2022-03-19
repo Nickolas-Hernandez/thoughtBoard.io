@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { UserContext, parseToken, createToken } from '../lib';
+import React, { useEffect } from 'react';
+import { UserProvider, parseToken, createToken } from '../lib';
 import HeaderSection from '../components/layout/headerSection';
 
 const ThoughtBoard = () => {
-  const [ user, setUser ] = useState(null);
-  const [ currentProject, setProject ] = useState(null);
-  const [ projects, setUserProjects ] = useState(null);
-
-  const userContext = { user, projects, currentProject };
-  console.log('userContext: ', userContext);
-
-  userContext.setCurrent = name => setProject(name); // move into context file
-
-  userContext.appendProject = newProject => { // move into context file
-    setUserProjects(projects => {
-      return [ ...projects, newProject ];
-    });
-  };
-
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     const assignExistingUser = async token => {
@@ -46,9 +31,9 @@ const ThoughtBoard = () => {
   };
 
   return (
-    <UserContext.Provider value={userContext}>
+    <UserProvider>
       <HeaderSection />
-    </UserContext.Provider>
+    </UserProvider>
   );
 };
 
