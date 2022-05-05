@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { MenuItem } from '@mui/material';
-import { UserContext } from '../../lib';
+import { useUser } from '../../lib';
 import {
   SytledProjSelector,
   StyledLabel,
@@ -10,7 +10,7 @@ import {
 } from './projSelectorStyles';
 
 const ProjectSelector = props => {
-  const userContext = useContext(UserContext);
+  const userContext = useUser();
   const { projects, currentProject } = userContext;
   let menuItems = null;
   if (projects) {

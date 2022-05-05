@@ -4,10 +4,10 @@ import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import StyledHeader from './headerStyles';
-import { UserContext } from '../../../lib';
+import { useUser } from '../../../lib';
 
 const HeaderSection = props => {
-  const userContext = useContext(UserContext);
+  const userContext = useUser();
   const { user, setCurrent, appendProject } = userContext;
 
   const initialState = {
