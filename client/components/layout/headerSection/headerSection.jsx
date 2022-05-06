@@ -1,14 +1,14 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import StyledHeader from './headerStyles';
-import { UserContext } from '../../../lib';
+import { useUser } from '../../../lib';
 
 const HeaderSection = props => {
-  const userContext = useContext(UserContext);
-  const { user, setCurrent, appendProject } = userContext;
+  const userContext = useUser();
+  const { userData, setCurrent, appendProject } = userContext;
 
   const initialState = {
     displayNewProjectForm: false,
@@ -44,7 +44,7 @@ const HeaderSection = props => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           projectName: name,
-          owner: user.id
+          owner: userData.id
         })
       };
       const response = await fetch('/api/newProject', init);
@@ -59,7 +59,7 @@ const HeaderSection = props => {
   return (
     <StyledHeader>
       <Typography variant='h2'>thoughtBoard.io</Typography>
-      <ProjectSelector selectProject={selectProject} selectedProject={state.currentProject} />
+      <ProjectSelector selectProject={selectProject} selectedProject={userContext.currentProject} />
       <NewProjectButton openNewProject={handleNewProject} />
       {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
     </StyledHeader>

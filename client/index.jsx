@@ -5,11 +5,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './utils/themeConfig';
 import './styles/resets.css';
 import App from './app';
+import { UserProvider } from './lib';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>
   </ThemeProvider>,
   document.querySelector('#root')
