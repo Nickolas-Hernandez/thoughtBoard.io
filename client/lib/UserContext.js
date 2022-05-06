@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { PropTypes } from 'prop-types';
 
 const UserContext = React.createContext();
 
@@ -9,14 +10,18 @@ const useUser = () => {
 const UserProvider = ({ children }) => {
   const [ userData, setUserData ] = useState(null);
   const [ currentProject, setProject ] = useState(null);
-  const [ projects, setUserProjects ] = useState(null);
+  const [ projects, setProjects ] = useState(null);
 
   const userContext = { userData, projects, currentProject };
 
+  userContext.setUser = user => setUserData(user);
+
   userContext.setCurrent = name => setProject(name); // move into context file
 
+  userContext.setUserProjects = projects => setProjects(projects);
+
   userContext.appendProject = newProject => { // move into context file
-    setUserProjects(projects => {
+    setProjects(projects => {
       return [ ...projects, newProject ];
     });
   };
@@ -26,6 +31,10 @@ const UserProvider = ({ children }) => {
       { children }
     </UserContext.Provider>
   );
+};
+
+UserProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export { UserProvider, useUser };

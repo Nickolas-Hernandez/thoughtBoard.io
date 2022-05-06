@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import { UserProvider, parseToken, createToken } from '../lib';
+import { parseToken, createToken, useUser } from '../lib';
 import HeaderSection from '../components/layout/headerSection';
 
 const ThoughtBoard = () => {
+  const userContext = useUser();
+
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     const assignExistingUser = async token => {
       const userInfo = parseToken(token);
-      setUser(userInfo);
+      userContext.setUser(userInfo);
       const userProjects = await getUserProjects(userInfo.id);
-      setUserProjects(userProjects);
+      userContext.setUserProjects(userProjects);
     };
     if (token) {
       assignExistingUser(token);
@@ -19,7 +21,7 @@ const ThoughtBoard = () => {
       const newToken = await createToken();
       const newUser = parseToken(newToken);
       window.localStorage.setItem('token', newToken);
-      setUser(newUser);
+      userContext.setUserData(newUser);
     };
     fetchToken();
   }, []);
@@ -31,9 +33,7 @@ const ThoughtBoard = () => {
   };
 
   return (
-    <UserProvider>
-      <HeaderSection />
-    </UserProvider>
+    <HeaderSection />
   );
 };
 
