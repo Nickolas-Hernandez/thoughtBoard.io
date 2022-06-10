@@ -3,8 +3,9 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { styled } from '@mui/material/styles';
 
 const SytledProjSelector = styled(FormControl)({
-  width: '250px',
-  fontSize: '1rem'
+  width: '200px',
+  fontSize: '1rem',
+  borderBottom: '1px solid #ffffff'
 });
 
 const StyledLabel = styled(InputLabel)({
@@ -13,7 +14,7 @@ const StyledLabel = styled(InputLabel)({
 });
 
 const StyledSelect = styled(Select)({
-  borderColor: '#2C2C31',
+  borderColor: 'white',
   backgroundColor: '#2C2C31'
 });
 

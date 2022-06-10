@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
-import StyledHeader from './headerStyles';
+import { StyledHeader, ProjectContainer } from './headerStyles';
 import { useUser } from '../../../lib';
 
 const HeaderSection = props => {
@@ -58,10 +58,11 @@ const HeaderSection = props => {
 
   return (
     <StyledHeader>
-      <Typography variant='h2'>thoughtBoard.io</Typography>
-      <ProjectSelector selectProject={selectProject} selectedProject={userContext.currentProject} />
-      <NewProjectButton openNewProject={handleNewProject} />
-      {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : ''}
+      <ProjectContainer>
+        {state.displayNewProjectForm ? <NewProjectForm submitNewProject={submitProjectName} /> : <ProjectSelector selectProject={selectProject} selectedProject={userContext.currentProject} />}
+        <NewProjectButton openNewProject={handleNewProject} />
+      </ProjectContainer>
+      <Typography variant='h2' sx={{ marginRight: '3.5rem' }}>thoughtBoard.io</Typography>
     </StyledHeader>
   );
 };
