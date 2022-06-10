@@ -8,7 +8,17 @@ const StyledHeader = styled(Box)({
   padding: '.5rem 1rem',
   display: 'flex',
   alignItems: 'flex-end',
+  justifyContent: 'space-between',
   borderBottom: '1px solid black'
 });
 
-export default StyledHeader;
+const ProjectContainer = styled(Box)({
+  padding: '0 1rem',
+  display: 'flex',
+  alignItems: 'flex-end'
+});
+
+export {
+  StyledHeader,
+  ProjectContainer
+};

@@ -19,8 +19,8 @@ const ProjectSelector = props => {
     });
   }
   return (
-    <SytledProjSelector>
-      <StyledLabel id="project-selector">Select Project</StyledLabel>
+    <SytledProjSelector variant="standard" sx={{ color: 'white' }}>
+      <StyledLabel variant="standard" id="project-selector" sx={{ zIndex: 1000 }}>Select Project</StyledLabel>
       <StyledSelect
       labelId="project-selector-label"
       id="project-selector"

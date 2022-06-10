@@ -3,13 +3,14 @@ import { styled } from '@mui/material/styles';
 
 const StyledForm = styled(Box)({
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  alignItems: 'flex-end'
 });
 
 const StyledInput = styled(TextField)({
   color: 'white',
-  label: 'Project Name',
-  variant: 'standard'
+  outline: 'none',
+  width: '200px'
 });
 
 export {
