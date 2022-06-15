@@ -1,7 +1,8 @@
 import React from 'react';
+import StyledSideBar from './sideBarStyles';
 
 const SideBar = props => {
-  return 'hello sideBar!';
+  return <StyledSideBar variant="permanent" anchor="left"></StyledSideBar>;
 };
 
 export default SideBar;
