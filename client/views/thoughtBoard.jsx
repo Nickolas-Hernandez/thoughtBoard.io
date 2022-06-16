@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { parseToken, createToken, useUser } from '../lib';
 import HeaderSection from '../components/layout/headerSection';
+import SideBar from '../components/layout/sideBar';
 
 const ThoughtBoard = () => {
   const userContext = useUser();
@@ -33,7 +34,10 @@ const ThoughtBoard = () => {
   };
 
   return (
-    <HeaderSection />
+    <>
+      <HeaderSection />
+      <SideBar />
+    </>
   );
 };
 
