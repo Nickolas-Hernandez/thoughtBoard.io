@@ -7,7 +7,7 @@ const SideBar = props => {
   const [ notes, setNotes ] = useState([]);
 
   const createNewNote = () => {
-    // create new li for note and append to notes array
+    // create new note and append to notes array
     const noteModel = {
       id: notes.length - 1, // fix this
       title: '',
@@ -15,6 +15,11 @@ const SideBar = props => {
       lastUpdate: new Date(),
       data: ''
     };
+
+    setNotes(notes => {
+      return [ ...notes, noteModel ];
+    });
+
   };
 
   // map notes
