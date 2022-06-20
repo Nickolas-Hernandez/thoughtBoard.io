@@ -15,22 +15,29 @@ const SideBar = props => {
       lastUpdate: new Date(),
       data: ''
     };
-
     setNotes(notes => {
       return [ ...notes, noteModel ];
     });
-
   };
-
   // map notes
+
+  const noteItems = notes.map(note => {
+    return <Note key={note.id} title={note.title} lastUpdate={note.lastUpdate} data={note.data}/>;
+  });
 
   return (
   <StyledSideBar variant="permanent" anchor="left" PaperProps={{ style: paperStyles }}>
-    <List>
-
-    </List>
+    <List>{noteItems}</List>
     <StyledAddIcon onClick={createNewNote}/>
   </StyledSideBar>
+  );
+};
+
+const Note = props => {
+  return (
+    <li>
+      poop
+    </li>
   );
 };
 

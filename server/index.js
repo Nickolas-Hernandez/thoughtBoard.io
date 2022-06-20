@@ -44,7 +44,8 @@ app.get('/api/userProjects/:userId', (req, res, next) => {
   }
   const projectQuery = `
     select "id",
-           "title"
+           "title",
+           "nextNoteId"
       from "projects"
       where "owner" = $1;
   `;
@@ -58,15 +59,16 @@ app.get('/api/userProjects/:userId', (req, res, next) => {
 
 app.post('/api/newProject', (req, res, next) => {
   const { projectName, owner } = req.body;
+  const nextNoteId = 0;
   if (!projectName || !owner) {
     throw new ClientError(400, 'Project name and project owner are required field');
   }
   const sql = `
-    insert into "projects" ("title", "owner")
-          values ($1, $2)
+    insert into "projects" ("title", "owner", "nextNoteId")
+          values ($1, $2, $3)
     returning "id", "title";
   `;
-  const params = [ projectName, owner ];
+  const params = [ projectName, owner, nextNoteId ];
   db.query(sql, params)
     .then(result => {
       res.status(200).json({ project: result.rows[0] });

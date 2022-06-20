@@ -10,7 +10,6 @@ const ThoughtBoard = () => {
     const token = window.localStorage.getItem('token');
     const assignExistingUser = async token => {
       const userInfo = parseToken(token);
-      console.log('1. userContext: ', userContext);
       userContext.setUser(userInfo);
       const userProjects = await getUserProjects(userInfo.id);
       userContext.setUserProjects(userProjects);
@@ -23,7 +22,6 @@ const ThoughtBoard = () => {
       const newToken = await createToken();
       const newUser = parseToken(newToken);
       window.localStorage.setItem('token', newToken);
-      console.log('2. userContext: ', userContext);
       userContext.setUser(newUser);
     };
     fetchToken();
