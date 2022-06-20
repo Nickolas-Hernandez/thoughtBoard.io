@@ -12,6 +12,8 @@ const UserProvider = ({ children }) => {
   const [ currentProject, setProject ] = useState(null);
   const [ projects, setProjects ] = useState(null);
 
+  console.log('current Project: ', currentProject);
+
   const userContext = { userData, projects, currentProject };
 
   userContext.setUser = user => setUserData(user);

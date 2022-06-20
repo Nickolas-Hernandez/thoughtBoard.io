@@ -22,7 +22,7 @@ const ThoughtBoard = () => {
       const newToken = await createToken();
       const newUser = parseToken(newToken);
       window.localStorage.setItem('token', newToken);
-      userContext.setUserData(newUser);
+      userContext.setUser(newUser);
     };
     fetchToken();
   }, []);

@@ -15,8 +15,15 @@ const StyledSideBar = styled(Drawer)({
 });
 
 const StyledAddIcon = styled(AddCircleOutlinedIcon)({
-  backgroundColor: 'white',
-  opacity: '50%'
+  fill: 'white',
+  opacity: '25%',
+  margin: '0.2rem auto',
+  fontSize: '28px',
+  cursor: 'pointer',
+  transition: 'opacity 0.1s linear',
+  '&:hover': {
+    opacity: '80%'
+  }
 });
 
 const paperStyles = {
@@ -24,7 +31,8 @@ const paperStyles = {
   left: '10px',
   top: '2px',
   right: '10px',
-  height: 'auto'
+  height: 'auto',
+  backgroundColor: '#2C2C31'
 };
 
 export {

@@ -14,15 +14,17 @@ create table "projects" (
   "id" serial,
   "owner" integer not null,
   "title" text not null,
+  "nextNoteId" integer not null,
   primary key ("id")
 );
 
 create table "notes" (
-  "id" serial,
+  "noteId" serial,
+  "order" integer not null,
   "project" integer not null,
   "title" text not null,
   "data" text not null,
-  "createdAt" timestamptz(6) not null default now(),
-  "lastEdittedAt" text not null,
-  primary key ("id")
+  "createdAt" text not null,
+  "lastEdited" text not null,
+  primary key ("noteId")
 );

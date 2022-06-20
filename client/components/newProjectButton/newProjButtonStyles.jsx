@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 
 const StyledProjButton = styled(AddIcon)({
-  margin: '0 10px',
+  margin: '0 10px 0 1rem',
   cursor: 'pointer',
   variant: 'body1',
   fontSize: '2.5rem'
