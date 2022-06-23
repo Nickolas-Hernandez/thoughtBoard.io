@@ -9,16 +9,14 @@ const useUser = () => {
 
 const UserProvider = ({ children }) => {
   const [ userData, setUserData ] = useState(null);
-  const [ currentProject, setProject ] = useState(null);
+  const [ currentProject, setProject ] = useState({ project: null, notes: null });
   const [ projects, setProjects ] = useState(null);
-
-  console.log('current Project: ', currentProject);
 
   const userContext = { userData, projects, currentProject };
 
   userContext.setUser = user => setUserData(user);
 
-  userContext.setCurrent = name => setProject(name); // move into context file
+  userContext.setCurrent = (name, notes) => setProject({ project: name, notes: notes }); // move into context file
 
   userContext.setUserProjects = projects => setProjects(projects);
 
