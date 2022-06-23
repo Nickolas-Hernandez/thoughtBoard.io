@@ -27,7 +27,7 @@ const ProjectSelector = props => {
       placeholder="Select Project"
       IconComponent={() => <StyledIcon />}
       MenuProps={MenuProps}
-      value={currentProject || ''}
+      value={currentProject.project || ''}
       onChange={event => userContext.setCurrent(event.target.value)}
       >
         { menuItems }
