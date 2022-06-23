@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { parseToken, createToken, useUser } from '../lib';
+import { getProjects } from '../services';
 import HeaderSection from '../components/layout/headerSection';
 import SideBar from '../components/layout/sideBar';
 
@@ -11,7 +12,7 @@ const ThoughtBoard = () => {
     const assignExistingUser = async token => {
       const userInfo = parseToken(token);
       userContext.setUser(userInfo);
-      const userProjects = await getUserProjects(userInfo.id);
+      const userProjects = await getProjects(userInfo.id);
       userContext.setUserProjects(userProjects);
     };
     if (token) {
@@ -26,12 +27,6 @@ const ThoughtBoard = () => {
     };
     fetchToken();
   }, []);
-
-  const getUserProjects = async userId => { // move
-    const response = await fetch(`/api/userProjects/${userId}`);
-    const projectData = await response.json();
-    return projectData;
-  };
 
   return (
     <>
