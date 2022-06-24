@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { List, ListItem } from '@mui/material';
 import { StyledSideBar, StyledAddIcon, paperStyles } from './sideBarStyles';
+import { useUser } from '../../../lib';
 
 const SideBar = props => {
-  // create state to hold notes
-  const [ notes, setNotes ] = useState([]);
+  const userContext = useUser();
+  const { currentProject, notes } = userContext;
+  console.log('notes: ', notes);
 
   const createNewNote = () => {
-    // create new note and append to notes array
     const noteModel = {
       id: notes.length - 1, // fix this
       title: '',
@@ -19,25 +20,31 @@ const SideBar = props => {
       return [ ...notes, noteModel ];
     });
   };
-  // map notes
 
-  const noteItems = notes.map(note => {
-    return <Note key={note.id} title={note.title} lastUpdate={note.lastUpdate} data={note.data}/>;
-  });
+  const generateNotes = () => {
+    if (!notes) return;
+    const noteItems = () => {
+      notes.map(note => {
+        return <Note key={note.id} title={note.title} lastUpdate={note.lastUpdate} data={note.data}/>;
+      });
+      return noteItems;
+    };
+  };
+  const notesList = generateNotes();
 
   return (
   <StyledSideBar variant="permanent" anchor="left" PaperProps={{ style: paperStyles }}>
-    <List>{noteItems}</List>
-    <StyledAddIcon onClick={createNewNote}/>
+    <List>{notesList}</List>
+    <StyledAddIcon onClick={ currentProject.project ? createNewNote : () => console.log('no mames')}/>
   </StyledSideBar>
   );
 };
 
 const Note = props => {
   return (
-    <li>
+    <ListItem>
       poop
-    </li>
+    </ListItem>
   );
 };
 
