@@ -57,6 +57,24 @@ app.get('/api/userProjects/:userId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/getNotes/:projectId', (req, res, next) => {
+  const projectId = req.params.projectId;
+  if (!projectId) {
+    throw new ClientError(400, 'Missing project ID');
+  }
+  const notesQuery = `
+    select *
+      from "notes"
+      where "project" = $1
+  `;
+  const params = [ projectId ];
+  db.query(notesQuery, params)
+    .then(notes => {
+      res.status(200).json(notes.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/newProject', (req, res, next) => {
   const { projectName, owner } = req.body;
   const nextNoteId = 0;
@@ -66,7 +84,7 @@ app.post('/api/newProject', (req, res, next) => {
   const sql = `
     insert into "projects" ("title", "owner", "nextNoteId")
           values ($1, $2, $3)
-    returning "id", "title";
+    returning "id", "title", "nextNoteId";
   `;
   const params = [ projectName, owner, nextNoteId ];
   db.query(sql, params)
