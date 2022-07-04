@@ -29,8 +29,17 @@ const ProjectSelector = props => {
       placeholder="Select Project"
       IconComponent={() => <StyledIcon />}
       MenuProps={MenuProps}
-      value={currentProject || ''}
-      onChange={event => userContext.setCurrent(event.target.value)}
+      value={currentProject ? currentProject.title : ''}
+      onChange={event => {
+        let project;
+        for (let i = 0; i < projects.length; i++) {
+          if (event.target.value === projects[i].title) {
+            project = projects[i];
+          }
+        }
+        userContext.setCurrent(project);
+        userContext.setProjectNotes(project);
+      }}
       >
         { menuItems }
       </StyledSelect>

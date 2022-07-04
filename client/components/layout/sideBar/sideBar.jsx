@@ -6,7 +6,6 @@ import { useUser } from '../../../lib';
 const SideBar = props => {
   const userContext = useUser();
   const { currentProject, notes } = userContext;
-  console.log('notes: ', notes);
 
   const createNewNote = () => {
     const noteModel = {

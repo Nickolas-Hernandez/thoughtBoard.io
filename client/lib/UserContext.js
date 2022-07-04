@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
+import { getNotes } from '../services';
 
 const UserContext = React.createContext();
 
@@ -17,7 +18,7 @@ const UserProvider = ({ children }) => {
 
   userContext.setUser = user => setUserData(user);
 
-  userContext.setCurrent = (name, notes) => setProject({ project: name, notes: notes }); // move into context file
+  userContext.setCurrent = project => setProject(project); // move into context file
 
   userContext.setUserProjects = projects => setProjects(projects);
 
@@ -27,7 +28,11 @@ const UserProvider = ({ children }) => {
     });
   };
 
-  userContext.setProjectNotes = noteList => setNotes(noteList);
+  userContext.setProjectNotes = project => {
+    if (!project) return;
+    const notes = getNotes(project.id);
+    setNotes(notes);
+  };
 
   return (
     <UserContext.Provider value={userContext}>

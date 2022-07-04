@@ -50,7 +50,6 @@ const HeaderSection = props => {
       const response = await fetch('/api/newProject', init);
       const result = await response.json();
       appendProject(result.project);
-      console.log(result.project);
       setCurrent(result.project, []);
     } catch (err) {
       console.error(err);
