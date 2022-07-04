@@ -10,15 +10,12 @@ const SideBar = props => {
 
   const createNewNote = () => {
     const noteModel = {
-      id: notes.length - 1, // fix this
+      id: currentProject.nextNoteId, // fix this
       title: '',
       created: new Date(),
       lastUpdate: new Date(),
       data: ''
     };
-    setNotes(notes => {
-      return [ ...notes, noteModel ];
-    });
   };
 
   const generateNotes = () => {
@@ -35,7 +32,7 @@ const SideBar = props => {
   return (
   <StyledSideBar variant="permanent" anchor="left" PaperProps={{ style: paperStyles }}>
     <List>{notesList}</List>
-    <StyledAddIcon onClick={ currentProject.project ? createNewNote : () => console.log('no mames')}/>
+    <StyledAddIcon onClick={ currentProject ? createNewNote : () => console.log('no mames')}/>
   </StyledSideBar>
   );
 };

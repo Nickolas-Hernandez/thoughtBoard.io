@@ -9,10 +9,11 @@ const useUser = () => {
 
 const UserProvider = ({ children }) => {
   const [ userData, setUserData ] = useState(null);
-  const [ currentProject, setProject ] = useState({ project: null, notes: null });
+  const [ currentProject, setProject ] = useState(null);
   const [ projects, setProjects ] = useState(null);
+  const [ notes, setNotes ] = useState(null);
 
-  const userContext = { userData, projects, currentProject };
+  const userContext = { userData, projects, currentProject, notes };
 
   userContext.setUser = user => setUserData(user);
 
@@ -25,6 +26,8 @@ const UserProvider = ({ children }) => {
       return [ ...projects, newProject ];
     });
   };
+
+  userContext.setProjectNotes = noteList => setNotes(noteList);
 
   return (
     <UserContext.Provider value={userContext}>
