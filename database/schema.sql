@@ -6,8 +6,7 @@ create schema "public";
 
 create table "users" (
   "id" serial,
-  "email" varchar(255) UNIQUE NOT NULL,
-  "password" varchar(255) NOT NULL,
+  "uuid" text not null,
   primary key ("id")
 );
 
