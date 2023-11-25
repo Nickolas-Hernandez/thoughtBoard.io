@@ -16,26 +16,42 @@ const UserProvider = ({ children }) => {
 
   const userContext = { userData, projects, currentProject, notes };
 
-  userContext.setUser = user => setUserData(user);
+  const setUser = user => setUserData(user);
 
-  userContext.setCurrent = project => setProject(project); // move into context file
+  const setCurrent = project => setProject(project); // move into context file
 
-  userContext.setUserProjects = projects => setProjects(projects);
+  const setUserProjects = projects => setProjects(projects);
 
-  userContext.appendProject = newProject => { // move into context file
+  const appendProject = newProject => { // move into context file
     setProjects(projects => {
       return [ ...projects, newProject ];
     });
   };
 
-  userContext.setProjectNotes = project => {
+  const setProjectNotes = project => {
     if (!project) return;
     const notes = getNotes(project.id);
     setNotes(notes);
   };
 
+  const removeUser = () => {
+    setUserData(null);
+    setProject(null);
+    setProjectNotes(null);
+    setNotes(null);
+  };
+
   return (
-    <UserContext.Provider value={userContext}>
+    <UserContext.Provider
+    value={{
+      userContext,
+      setUser,
+      setCurrent,
+      setUserProjects,
+      appendProject,
+      setProjectNotes,
+      removeUser
+    }}>
       { children }
     </UserContext.Provider>
   );
