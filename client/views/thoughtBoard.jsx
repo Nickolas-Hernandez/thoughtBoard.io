@@ -10,10 +10,8 @@ const ThoughtBoard = () => {
   const { token } = auth;
 
   useEffect(() => {
-    if (!userContext.userData) {
-      if (token) {
-        setUser(parseToken(token));
-      }
+    if (!userContext.userData && token) {
+      setUser(parseToken(token));
     }
   }, [ userContext, token, setUser ]);
 
