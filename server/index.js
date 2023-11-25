@@ -93,6 +93,28 @@ app.post('/api/newProject', (req, res, next) => {
     });
 });
 
+app.post('/api/newNote/:projectId', (req, res, next) => {
+  const {
+    created,
+    lastUpdate
+  } = req.body;
+  const project = req.params.projectId;
+  const sql = `
+  insert into "notes" ( "order", "project", "title", "data", "createdAt", "lastEdited")
+         values ($1, $2, $3, $4, $5, $6)
+  returning *`;
+  const params = [
+    1,
+    project,
+    'New Note',
+    'Note Data',
+    created,
+    lastUpdate ];
+  db.query(sql, params).then(result => {
+    res.status(200).json({ savedNote: result.rows[0] });
+  });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

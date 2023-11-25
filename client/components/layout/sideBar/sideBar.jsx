@@ -7,7 +7,7 @@ const SideBar = props => {
   const userContext = useUser();
   const { currentProject, notes } = userContext;
 
-  const createNewNote = () => {
+  const createNewNote = async () => {
     const noteModel = {
       id: currentProject.nextNoteId, // fix this
       title: '',
@@ -15,6 +15,17 @@ const SideBar = props => {
       lastUpdate: new Date(),
       data: ''
     };
+    console.log('noteModel', noteModel);
+    console.log('currentProj', currentProject);
+    const response = await fetch(`/api/newNote/${currentProject.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(noteModel)
+    });
+    const savedNote = await response.json();
+    console.log('savedNote: ', savedNote);
   };
 
   const generateNotes = () => {
