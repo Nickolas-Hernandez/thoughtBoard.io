@@ -22,24 +22,6 @@ const db = new pg.Pool({
 app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
-app.get('/api/createUser', (req, res, next) => {
-  const uuid = uuidv4();
-  const sql = `
-    insert into "users" ("uuid")
-           values ($1)
-    returning *;
-  `;
-  const params = [ uuid ];
-  db.query(sql, params)
-    .then(result => {
-      const newUser = result.rows[0];
-      const token = jwt.sign({ id: newUser.id }, newUser.uuid);
-      const payload = { userId: newUser.id };
-      res.status(200).json({ token: token, payload: payload });
-    })
-    .catch(err => next(err));
-});
-
 app.post('/api/signup', async (req, res, next) => {
   try {
     const { email, password } = req.body;
