@@ -46,29 +46,20 @@ app.post('/api/signup', async (req, res, next) => {
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required.' });
     }
-    const userResult = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    const userResult = await db.query('SELECT * FROM users WHERE email = $1', [ email ]);
     if (userResult.rows.length > 0) {
       return res.status(409).json({ message: 'User already exists.' });
     }
-
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Insert the new user into the database
     const newUser = await db.query(
       'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id',
       [ email, hashedPassword ]
     );
-
-    // Generate JWT
     const userId = newUser.rows[0].id;
     const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
-
-    // Send the JWT to the client
     res.status(201).json({ token, message: 'User created successfully.' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Internal server error.' });
   }
 });
@@ -91,7 +82,6 @@ app.post('/api/login', async (req, res, next) => {
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
     res.status(200).json({ token, message: 'Login successful.' });
   } catch (error) {
-    console.error(error);
     next(new ClientError(500, 'Internal server error'));
   }
 });

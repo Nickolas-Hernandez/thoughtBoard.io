@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Button, Box, Typography, Link } from '@mui/material';
+import { Container, Button, Box, Typography, Link, Alert } from '@mui/material';
 import { BackgroundImage, StyledPaper, StyledInputField } from './loginStyles';
 
 const Login = ({ onLogin }) => {
@@ -23,8 +23,8 @@ const Login = ({ onLogin }) => {
     return newErrors;
   };
 
-  const handleSubmit = async event => {
-    event.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
       const user = {
@@ -44,10 +44,8 @@ const Login = ({ onLogin }) => {
         const data = await response.json();
 
         if (response.ok) {
-          console.log('Success:', data);
           onLogin(data.token);
         } else {
-          console.log('Error:', data);
           setErrors({ api: data.message });
         }
       } catch (error) {
@@ -77,6 +75,7 @@ const Login = ({ onLogin }) => {
           <Typography component="h3" variant='body1'>
             {isSignUp ? 'Sign Up' : 'Log In'}
           </Typography>
+          { errors.api ? <Alert variant="outlined" severity="error" sx={{width: '100%', marginTop: '1rem'}}>{errors.api}</Alert> : '' }
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, color: 'black' }}>
             <StyledInputField
               margin="normal"
@@ -86,7 +85,12 @@ const Login = ({ onLogin }) => {
               label="Your email"
               name="email"
               autoComplete="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                if (errors) {
+                  setErrors({});
+                }
+                setEmail(e.target.value);
+              }}
               error={!!errors.email}
               helperText={errors.email || ''}
               autoFocus
@@ -105,7 +109,12 @@ const Login = ({ onLogin }) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                if (errors) {
+                  setErrors({});
+                }
+                setPassword(e.target.value);
+              }}
               error={!!errors.password}
               helperText={errors.password || ''}
               sx={{
