@@ -7,19 +7,28 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    if (!storedToken) return;
+    const expirationTime = localStorage.getItem('token_expiration');
+    if (!storedToken || new Date().getTime() > expirationTime) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('token_expiration');
+      logout();
+    }
     setAuth({ isLoggedIn: true, token: storedToken });
   }, []);
 
   const login = token => {
+    if (!token) return;
     setAuth({ isLoggedIn: true, token });
+    const expiresIn = 3600;
+    const expirationTime = new Date().getTime() + expiresIn * 1000;
     localStorage.setItem('token', token);
+    localStorage.setItem('token_expiration', expirationTime);
   };
 
   const logout = () => {
     setAuth({ isLoggedIn: false, token: null });
-    // Clear token storage
     localStorage.removeItem('token');
+    localStorage.removeItem('token_expiration');
   };
 
   return (
