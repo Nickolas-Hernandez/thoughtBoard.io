@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Button, Box, Typography, Link, Alert } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { BackgroundImage, StyledPaper, StyledInputField } from './loginStyles';
 
 const Login = ({ onLogin }) => {
@@ -7,6 +8,7 @@ const Login = ({ onLogin }) => {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState({});
+  const theme = useTheme();
 
   const handleToggle = () => {
     setIsSignUp(!isSignUp);
@@ -58,7 +60,14 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <Container component="main" maxWidth="lg" sx={{ display: 'flex', height: '100vh' }}>
+    <Container component="main" maxWidth="lg" sx={{
+      display: 'flex',
+      height: '100vh',
+      justifyContent: 'center',
+      [theme.breakpoints.up('md')]: {
+        justifyContent: 'flex-start'
+      }
+    }}>
       <StyledPaper elevation={6}>
         <Box
           sx={{
@@ -144,7 +153,12 @@ const Login = ({ onLogin }) => {
           </Box>
         </Box>
       </StyledPaper>
-      <BackgroundImage />
+      <BackgroundImage sx={{
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+          display: 'block'
+        }
+      }}/>
     </Container>
   );
 };
