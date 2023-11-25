@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const BackgroundImage = styled('div')(({ theme }) => ({
-  backgroundImage: 'url(assets/iewek-gnos-hhUx08PuYpc-unsplash.jpg)',
+  backgroundImage: 'url(assets/yannick-pulver-hopX_jpVtRM-unsplash.jpg)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   position: 'absolute',
