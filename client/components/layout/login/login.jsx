@@ -46,6 +46,7 @@ const Login = ({ onLogin }) => {
         const data = await response.json();
 
         if (response.ok) {
+          console.log(data);
           onLogin(data.token);
         } else {
           setErrors({ api: data.message });
