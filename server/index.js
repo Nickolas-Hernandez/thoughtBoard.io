@@ -73,6 +73,29 @@ app.post('/api/signup', async (req, res, next) => {
   }
 });
 
+app.post('/api/login', async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
+  try {
+    const userResult = await db.query('SELECT * FROM users WHERE email = $1', [ email ]);
+    if (userResult.rows.length === 0) {
+      return res.status(401).json({ message: 'Invalid email or password.' });
+    }
+    const user = userResult.rows[0];
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(401).json({ message: 'Invalid email or password.' });
+    }
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ token, message: 'Login successful.' });
+  } catch (error) {
+    console.error(error);
+    next(new ClientError(500, 'Internal server error'));
+  }
+});
+
 app.use(authenticateToken);
 
 app.get('/api/userProjects/:userId', (req, res, next) => {
