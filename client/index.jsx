@@ -10,11 +10,11 @@ import App from './app';
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
-      <UserProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <UserProvider>
           <App />
-        </AuthProvider>
-      </UserProvider>
+        </UserProvider>
+      </AuthProvider>
     </BrowserRouter>
   </ThemeProvider>,
   document.querySelector('#root')
