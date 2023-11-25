@@ -12,8 +12,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('token_expiration');
       logout();
+    } else {
+      setAuth({ isLoggedIn: true, token: storedToken });
     }
-    setAuth({ isLoggedIn: true, token: storedToken });
   }, []);
 
   const login = token => {
