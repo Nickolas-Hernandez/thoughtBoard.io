@@ -23,6 +23,7 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.post('/api/signup', async (req, res, next) => {
+  console.log(req.body);
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -34,14 +35,16 @@ app.post('/api/signup', async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    const uuid = uuidv4();
     const newUser = await db.query(
-      'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id',
-      [ email, hashedPassword ]
+      'INSERT INTO users (email, password, uuid) VALUES ($1, $2, $3) RETURNING uuid',
+      [ email, hashedPassword, uuid ]
     );
     const userId = newUser.rows[0].id;
     const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
     res.status(201).json({ token, message: 'User created successfully.' });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'Internal server error.' });
   }
 });
