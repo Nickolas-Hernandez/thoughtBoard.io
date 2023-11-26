@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token_expiration');
       logout();
     } else {
-      setAuth({ isLoggedIn: true, token: storedToken });
+      setAuth(prevState => ({ ...prevState, isLoggedIn: true, token: storedToken }));
     }
   }, []);
 
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const userDetails = await getUser(auth.token);
           console.log('userDetails: ', userDetails);
-          const userProjects = await getUser(auth.token);
+          const userProjects = await getProjects(userDetails.id, auth.token);
           console.log('userProjects: ', userProjects);
           setAuth(prevState => ({
             ...prevState,
@@ -69,12 +69,26 @@ export const AuthProvider = ({ children }) => {
     }
   }, [ auth.isLoggedIn, auth.token ]);
 
-  const setCurrentProject = {
+  const setCurrentProject = currentProject => {
+    console.log('current: ', currentProject);
+    setAuth(prevState => ({
+      ...prevState,
+      currentProject: currentProject
+    }));
+  };
 
-  }
+  const appendNewProject = newProject => {
+    console.log('new: ', newProject);
+    setAuth(prevState => ({
+      ...prevState,
+      userProjects: [ ...prevState.userProjects, newProject ]
+    }));
+  };
+
+  console.log('here', auth);
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, setCurrentProject, appendNewProject }}>
       {children}
     </AuthContext.Provider>
   );

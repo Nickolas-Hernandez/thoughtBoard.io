@@ -1,6 +1,5 @@
-const getProjects = async userId => {
+const getProjects = async (userId, token) => {
   try {
-    const token = localStorage.getItem('token');
     const response = await fetch(`/api/userProjects/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
