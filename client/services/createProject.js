@@ -14,7 +14,7 @@ const getProjects = async ({ projectName, owner }) => {
       body: JSON.stringify(payload)
     });
     const projectData = await response.json();
-    return projectData;
+    return projectData.project;
   } catch (err) {
     console.error(err);
   }

@@ -5,16 +5,15 @@ import { createProject } from '../../services';
 import { useAuth } from '../../lib';
 
 const NewProjectForm = props => {
-  const { auth } = useAuth();
+  const { auth, setCurrentProject, appendNewProject } = useAuth();
   const [ projectName, setProjectName ] = useState('');
 
-  const submitNewProject = e => {
+  const submitNewProject = async e => {
     e.preventDefault();
-    console.log(projectName);
-    // send new rpoject to api
     const owner = auth.userDetails.id;
-    createProject({ projectName, owner });
-
+    const newProject = await createProject({ projectName, owner });
+    setCurrentProject(newProject);
+    appendNewProject(newProject);
   };
 
   return (
