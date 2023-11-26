@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem } from '@mui/material';
-import { useUser } from '../../lib';
+import { useAuth } from '../../lib';
+
 import {
   SytledProjSelector,
   StyledLabel,
@@ -10,12 +11,12 @@ import {
 } from './projSelectorStyles';
 
 const ProjectSelector = props => {
-  const userContext = useUser();
-  const { projects, currentProject } = userContext;
+  const { auth, setCurrentProject } = useAuth();
+  const { userProjects, currentProject } = auth;
   let menuItems = null;
 
-  if (projects) {
-    menuItems = projects.map(project => {
+  if (userProjects) {
+    menuItems = userProjects.map(project => {
       return <MenuItem value={project.title} key={project.id}>{project.title}</MenuItem>;
     });
   }
@@ -32,13 +33,13 @@ const ProjectSelector = props => {
       value={currentProject ? currentProject.title : ''}
       onChange={event => {
         let project;
-        for (let i = 0; i < projects.length; i++) {
-          if (event.target.value === projects[i].title) {
-            project = projects[i];
+        for (let i = 0; i < userProjects.length; i++) {
+          if (event.target.value === userProjects[i].title) {
+            project = userProjects[i];
           }
         }
-        userContext.setCurrent(project);
-        userContext.setProjectNotes(project);
+        setCurrentProject(project);
+        // userContext.setProjectNotes(project);
       }}
       >
         { menuItems }

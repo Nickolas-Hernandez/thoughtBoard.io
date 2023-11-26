@@ -52,9 +52,7 @@ export const AuthProvider = ({ children }) => {
       const fetchUserData = async () => {
         try {
           const userDetails = await getUser(auth.token);
-          console.log('userDetails: ', userDetails);
           const userProjects = await getProjects(userDetails.id, auth.token);
-          console.log('userProjects: ', userProjects);
           setAuth(prevState => ({
             ...prevState,
             userDetails,
@@ -70,7 +68,6 @@ export const AuthProvider = ({ children }) => {
   }, [ auth.isLoggedIn, auth.token ]);
 
   const setCurrentProject = currentProject => {
-    console.log('current: ', currentProject);
     setAuth(prevState => ({
       ...prevState,
       currentProject: currentProject
@@ -78,14 +75,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const appendNewProject = newProject => {
-    console.log('new: ', newProject);
     setAuth(prevState => ({
       ...prevState,
       userProjects: [ ...prevState.userProjects, newProject ]
     }));
   };
-
-  console.log('here', auth);
 
   return (
     <AuthContext.Provider value={{ auth, login, logout, setCurrentProject, appendNewProject }}>

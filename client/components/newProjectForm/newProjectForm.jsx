@@ -12,8 +12,9 @@ const NewProjectForm = props => {
     e.preventDefault();
     const owner = auth.userDetails.id;
     const newProject = await createProject({ projectName, owner });
-    setCurrentProject(newProject);
     appendNewProject(newProject);
+    setCurrentProject(newProject);
+    props.onClose();
   };
 
   return (

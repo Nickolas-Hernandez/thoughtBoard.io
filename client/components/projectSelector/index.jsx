@@ -1,3 +1,3 @@
-// import ProjectSelector from './projectSelector';
+import ProjectSelector from './projectSelector';
 
-// export default ProjectSelector;
+export default ProjectSelector;
