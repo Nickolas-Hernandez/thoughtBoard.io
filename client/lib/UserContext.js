@@ -17,7 +17,6 @@ const UserProvider = ({ children }) => {
   const userContext = { userData, projects, currentProject, notes };
 
   const setUser = user => setUserData(user);
-
   const setCurrent = project => setProject(project); // move into context file
 
   const setUserProjects = projects => setProjects(projects);

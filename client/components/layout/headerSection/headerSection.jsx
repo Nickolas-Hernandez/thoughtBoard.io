@@ -1,13 +1,20 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import { StyledHeader, ProjectContainer } from './headerStyles';
 import { useUser } from '../../../lib';
+import { getProjects } from '../../../services';
 
 const HeaderSection = props => {
-  const { userContext, setCurrent, appendProject } = useUser();
+  const { userContext, setCurrent, appendProject, setUserProjects } = useUser();
+
+  useEffect(() => {
+    if (userContext.userData.userId) {
+      setUserProjects(getProjects(userContext.userData.userId));
+    }
+  }, [ userContext, setUserProjects ]);
 
   const initialState = {
     displayNewProjectForm: false,
