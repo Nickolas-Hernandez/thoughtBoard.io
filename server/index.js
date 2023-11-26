@@ -148,24 +148,24 @@ app.post('/api/newProject', (req, res, next) => {
     });
 });
 
-app.post('/api/newNote/:projectId', (req, res, next) => {
-  const {
-    created,
-    lastUpdate
-  } = req.body;
-  const project = req.params.projectId;
+app.post('/api/newNote/', (req, res, next) => {
+  const { projectId } = req.body;
+  const createdAt = new Date();
+  const lastUpdate = new Date();
+  console.log('req body: ', req.body);
   const sql = `
   insert into "notes" ( "order", "project", "title", "data", "createdAt", "lastEdited")
          values ($1, $2, $3, $4, $5, $6)
   returning *`;
   const params = [
     1,
-    project,
+    projectId,
     'New Note',
     'Note Data',
-    created,
+    createdAt,
     lastUpdate ];
   db.query(sql, params).then(result => {
+    console.log('result: ', result.rows[0]);
     res.status(200).json({ savedNote: result.rows[0] });
   });
 });
