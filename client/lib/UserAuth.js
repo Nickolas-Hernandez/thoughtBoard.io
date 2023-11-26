@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn: false,
     token: null,
     userDetails: null,
-    userProjects: []
+    userProjects: [],
+    currentProject: null
   });
 
   useEffect(() => {
@@ -25,7 +26,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = token => {
     if (!token) return;
-    setAuth({ isLoggedIn: true, token });
+    setAuth(prevState => ({
+      ...prevState,
+      isLoggedIn: true,
+      token
+    }));
     const expiresIn = 3600;
     const expirationTime = new Date().getTime() + expiresIn * 1000;
     localStorage.setItem('token', token);
@@ -33,7 +38,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setAuth({ isLoggedIn: false, token: null });
+    setAuth(prevState => ({
+      ...prevState,
+      isLoggedIn: false,
+      token: null
+    }));
     localStorage.removeItem('token');
     localStorage.removeItem('token_expiration');
   };
@@ -59,6 +68,10 @@ export const AuthProvider = ({ children }) => {
       fetchUserData();
     }
   }, [ auth.isLoggedIn, auth.token ]);
+
+  const setCurrentProject = {
+
+  }
 
   return (
     <AuthContext.Provider value={{ auth, login, logout }}>
