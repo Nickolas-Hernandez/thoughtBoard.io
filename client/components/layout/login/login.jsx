@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Container, Button, Box, Typography, Link, Alert } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { BackgroundImage, StyledPaper, StyledInputField } from './loginStyles';
-import { parseToken } from '../../../lib';
 
-const Login = ({ onLogin, setUser }) => {
+const Login = ({ onLogin }) => {
   const [ isSignUp, setIsSignUp ] = useState(false);
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -48,7 +47,6 @@ const Login = ({ onLogin, setUser }) => {
 
         if (response.ok) {
           onLogin(data.token);
-          setUser(parseToken(data.token));
         } else {
           setErrors({ api: data.message });
         }

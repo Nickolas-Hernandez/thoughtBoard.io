@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { StyledForm, StyledInput } from './newProjFormStyles';
+import { createProject } from '../../services';
+import { useAuth } from '../../lib';
 
 const NewProjectForm = props => {
-  const [ value, setValue ] = useState('');
+  const { auth } = useAuth();
+  const [ projectName, setProjectName ] = useState('');
+
+  const submitNewProject = e => {
+    e.preventDefault();
+    console.log(projectName);
+    // send new rpoject to api
+    const owner = auth.userDetails.id;
+    createProject({ projectName, owner });
+
+  };
 
   return (
-    <StyledForm component='form' variant="standard" onSubmit={event => {
-      event.preventDefault();
-      props.submitNewProject(value);
-    }}>
+    <StyledForm component='form' variant="standard" onSubmit={submitNewProject}>
       <StyledInput
-      onChange={e => setValue(e.target.value)}
-      value={value}
+      onChange={e => setProjectName(e.target.value)}
+      value={projectName}
       variant='standard'
       label='Project Name'
       sx={{ label: { color: 'white' }, borderBottom: '1px solid white' }}

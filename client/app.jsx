@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/thought-board" element={<ThoughtBoard />} />
+        <Route path="/thought-board" element={<ThoughtBoard />} />
     </Routes>
   );
 };
