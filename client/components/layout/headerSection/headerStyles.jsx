@@ -1,5 +1,6 @@
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
+import AddIcon from '@mui/icons-material/Add';
 
 const StyledHeader = styled(Box)({
   backgroundColor: '#2C2C31',
@@ -17,7 +18,15 @@ const ProjectContainer = styled(Box)({
   alignItems: 'flex-end'
 });
 
+const StyledProjButton = styled(AddIcon)({
+  margin: '0 10px 0 1rem',
+  cursor: 'pointer',
+  variant: 'body1',
+  fontSize: '2.5rem'
+});
+
 export {
   StyledHeader,
-  ProjectContainer
+  ProjectContainer,
+  StyledProjButton
 };
