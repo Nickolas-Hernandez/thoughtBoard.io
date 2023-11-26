@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../lib';
-// import HeaderSection from '../components/layout/headerSection';
+import HeaderSection from '../components/layout/headerSection';
 // import SideBar from '../components/layout/sideBar';
 import Login from '../components/layout/login';
 
@@ -9,18 +9,16 @@ const ThoughtBoard = () => {
 
   if (!auth.isLoggedIn) {
     return <Login onLogin={login} />;
-    // return <Login onLogin={login} setUser={setUser} />;
   }
 
   const handleLogout = () => {
     logout();
-    // removeUser();
   };
 
   return (
     <>
-      {/* <HeaderSection />
-      <SideBar /> */}
+      <HeaderSection />
+      {/* <SideBar /> */}
       <button onClick={handleLogout}>Logout</button>
     </>
   );
