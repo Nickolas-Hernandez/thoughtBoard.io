@@ -94,7 +94,7 @@ const Login = ({ onLogin }) => {
               label="Your email"
               name="email"
               autoComplete="email"
-              onChange={(e) => {
+              onChange={e => {
                 if (errors) {
                   setErrors({});
                 }
@@ -118,7 +118,7 @@ const Login = ({ onLogin }) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => {
+              onChange={e => {
                 if (errors) {
                   setErrors({});
                 }

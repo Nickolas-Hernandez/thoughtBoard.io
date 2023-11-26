@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <>
       <h1>This Is Big Beefy Landing Page</h1>
-      <Link to="/thought-board">Go To Projects -&gt;</Link>
+      <Link to="/thought-board">Go To Project -&gt;</Link>
     </>
   );
 };
