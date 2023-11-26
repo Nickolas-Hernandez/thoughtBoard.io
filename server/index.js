@@ -34,9 +34,10 @@ app.post('/api/signup', async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    const uuid = uuidv4();
     const newUser = await db.query(
-      'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id',
-      [ email, hashedPassword ]
+      'INSERT INTO users (email, password, uuid) VALUES ($1, $2, $3) RETURNING uuid',
+      [ email, hashedPassword, uuid ]
     );
     const userId = newUser.rows[0].id;
     const token = jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
@@ -69,6 +70,27 @@ app.post('/api/login', async (req, res, next) => {
 });
 
 app.use(authenticateToken);
+
+app.get('/api/user/', async (req, res, next) => {
+  try {
+    const userQuery = `
+      select "id", 
+             "email", 
+             "uuid" 
+        from users 
+        where id = $1`;
+    const userResult = await db.query(userQuery, [ req.user.userId ]);
+    if (userResult.rows.length > 0) {
+      const userDetails = userResult.rows[0];
+      res.json(userDetails);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.get('/api/userProjects/:userId', (req, res, next) => {
   const user = req.params.userId;

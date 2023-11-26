@@ -1,14 +1,20 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Typography } from '@mui/material';
 import ProjectSelector from '../../projectSelector';
 import NewProjectButton from '../../newProjectButton';
 import NewProjectForm from '../../newProjectForm';
 import { StyledHeader, ProjectContainer } from './headerStyles';
 import { useUser } from '../../../lib';
+import { getProjects } from '../../../services';
 
 const HeaderSection = props => {
-  const userContext = useUser();
-  const { userData, setCurrent, appendProject } = userContext;
+  const { userContext, setCurrent, appendProject, setUserProjects } = useUser();
+
+  useEffect(() => {
+    if (userContext.userData.userId) {
+      setUserProjects(getProjects(userContext.userData.userId));
+    }
+  }, [ userContext, setUserProjects ]);
 
   const initialState = {
     displayNewProjectForm: false,
@@ -39,12 +45,16 @@ const HeaderSection = props => {
     dispatch({ type: 'updateCurrentProject', payload: { name: name } });
     dispatch({ type: 'handleForm' });
     try {
+      const token = localStorage.getItem('token');
       const init = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           projectName: name,
-          owner: userData.id
+          owner: userContext.userData.id
         })
       };
       const response = await fetch('/api/newProject', init);

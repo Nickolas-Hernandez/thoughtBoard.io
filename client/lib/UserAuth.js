@@ -1,9 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getUser, getProjects } from '../services';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [ auth, setAuth ] = useState({ isLoggedIn: false, token: null });
+  const [ auth, setAuth ] = useState({
+    isLoggedIn: false,
+    token: null,
+    userDetails: null,
+    userProjects: []
+  });
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -31,6 +37,28 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('token_expiration');
   };
+
+  useEffect(() => {
+    if (auth.isLoggedIn && auth.token) {
+      const fetchUserData = async () => {
+        try {
+          const userDetails = await getUser(auth.token);
+          console.log('userDetails: ', userDetails);
+          const userProjects = await getUser(auth.token);
+          console.log('userProjects: ', userProjects);
+          setAuth(prevState => ({
+            ...prevState,
+            userDetails,
+            userProjects
+          }));
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
+        }
+      };
+
+      fetchUserData();
+    }
+  }, [ auth.isLoggedIn, auth.token ]);
 
   return (
     <AuthContext.Provider value={{ auth, login, logout }}>
