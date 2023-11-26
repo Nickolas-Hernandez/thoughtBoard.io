@@ -45,6 +45,13 @@ export const AuthProvider = ({ children }) => {
     }));
     localStorage.removeItem('token');
     localStorage.removeItem('token_expiration');
+    setAuth(() => ({
+      isLoggedIn: false,
+      token: null,
+      userDetails: null,
+      userProjects: [],
+      currentProject: null
+    }));
   };
 
   useEffect(() => {
