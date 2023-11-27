@@ -19,8 +19,10 @@ const ThoughtBoard = () => {
   return (
     <>
       <HeaderSection />
-      <SideBar />
-      <NotePad />
+      <div style={{display: 'flex'}}>
+        <SideBar />
+        <NotePad />
+      </div>
       <button onClick={handleLogout}>Logout</button>
     </>
   );
