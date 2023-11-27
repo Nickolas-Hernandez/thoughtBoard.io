@@ -13,8 +13,9 @@ const createNote = async (projectId, noteId) => {
       },
       body: JSON.stringify(payload)
     });
-    const noteData = await response.json();
-    console.log('returned note data: ', noteData);
+    const newNote = await response.json();
+    console.log('returned note note: ', newNote);
+    return newNote;
   } catch (err) {
     console.error(err);
   }

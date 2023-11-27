@@ -1,7 +1,7 @@
-const getNotes = async projectId => {
+const getProjectNotes = async projectId => {
   const token = localStorage.getItem('token');
   try {
-    const notesJSON = await fetch(`/api/getNotes/${projectId}`, {
+    const notesJSON = await fetch(`/api/getProjectNotes/${projectId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -13,4 +13,4 @@ const getNotes = async projectId => {
   }
 };
 
-export default getNotes;
+export default getProjectNotes;

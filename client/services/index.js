@@ -1,13 +1,13 @@
 import getUser from './getUser';
 import getProjects from './getProjects';
 import createProject from './createProject';
-import getNotes from './getNotes';
+import getProjectNotes from './getProjectNotes';
 import createNote from './createNote';
 
 export {
   getUser,
   getProjects,
   createProject,
-  getNotes,
+  getProjectNotes,
   createNote
 };

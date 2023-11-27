@@ -112,7 +112,7 @@ app.get('/api/userProjects/:userId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/getNotes/:projectId', (req, res, next) => {
+app.get('/api/getProjectNotes/:projectId', (req, res, next) => {
   const projectId = req.params.projectId;
   if (!projectId) {
     throw new ClientError(400, 'Missing project ID');
