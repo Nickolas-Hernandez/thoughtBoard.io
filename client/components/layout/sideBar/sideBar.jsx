@@ -5,14 +5,15 @@ import { useAuth } from '../../../lib';
 import { createNote } from '../../../services';
 
 const SideBar = props => {
-  const { auth } = useAuth();
+  const { auth, appendNewNote } = useAuth();
   const { currentProject, currentNotes } = auth;
 
   const createNewNote = async e => {
     console.log(e.target);
     console.log('add new note to side bar');
     const newNote = await createNote(currentProject.id, currentProject.nextNoteId);
-    console.log('newNote: ', newNote);
+    console.log('newNote: ', newNote.savedNote);
+    appendNewNote(newNote.savedNote);
   };
 
   return (

@@ -88,6 +88,12 @@ export const AuthProvider = ({ children }) => {
       userProjects: [ ...prevState.userProjects, newProject ]
     }));
   };
+  const appendNewNote = newNote => {
+    setAuth(prevState => ({
+      ...prevState,
+      currentNotes: [ ...prevState.currentNotes, newNote ]
+    }));
+  };
 
   useEffect(() => {
     if (auth.isLoggedIn && auth.currentProject) {
@@ -105,7 +111,14 @@ export const AuthProvider = ({ children }) => {
   console.log('auth: ', auth);
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout, setCurrentProject, appendNewProject }}>
+    <AuthContext.Provider value={{
+      auth,
+      login,
+      logout,
+      setCurrentProject,
+      appendNewProject,
+      appendNewNote
+    }}>
       {children}
     </AuthContext.Provider>
   );
