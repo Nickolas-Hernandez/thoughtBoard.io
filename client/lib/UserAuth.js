@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getUser, getProjects } from '../services';
+import { getUser, getProjects, getProjectNotes } from '../services';
 
 const AuthContext = createContext(null);
 
@@ -9,7 +9,8 @@ export const AuthProvider = ({ children }) => {
     token: null,
     userDetails: null,
     userProjects: [],
-    currentProject: null
+    currentProject: null,
+    currentNotes: []
   });
 
   useEffect(() => {
@@ -87,6 +88,21 @@ export const AuthProvider = ({ children }) => {
       userProjects: [ ...prevState.userProjects, newProject ]
     }));
   };
+
+  useEffect(() => {
+    if (auth.isLoggedIn && auth.currentProject) {
+      const fetchProjectNotes = async () => {
+        const notes = await getProjectNotes(auth.currentProject.id);
+        setAuth(prevState => ({
+          ...prevState,
+          currentNotes: notes
+        }));
+      };
+      fetchProjectNotes();
+    }
+  }, [ auth.isLoggedIn, auth.currentProject ]);
+
+  console.log('auth: ', auth);
 
   return (
     <AuthContext.Provider value={{ auth, login, logout, setCurrentProject, appendNewProject }}>
