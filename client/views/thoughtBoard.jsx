@@ -3,6 +3,7 @@ import { useAuth } from '../lib';
 import HeaderSection from '../components/layout/headerSection';
 import SideBar from '../components/layout/sideBar';
 import Login from '../components/layout/login';
+import NotePad from '../components/layout/notePad';
 
 const ThoughtBoard = () => {
   const { auth, login, logout } = useAuth();
@@ -18,7 +19,10 @@ const ThoughtBoard = () => {
   return (
     <>
       <HeaderSection />
-      <SideBar />
+      <div style={{display: 'flex'}}>
+        <SideBar />
+        <NotePad />
+      </div>
       <button onClick={handleLogout}>Logout</button>
     </>
   );
