@@ -4,7 +4,6 @@ import { StyledSideBar, StyledAddIcon, paperStyles } from './sideBarStyles';
 import { useAuth } from '../../../lib';
 import { createNote } from '../../../services';
 
-
 const SideBar = props => {
   const { auth } = useAuth();
   const { currentProject } = auth;
@@ -20,9 +19,18 @@ const SideBar = props => {
   return (
   <StyledSideBar variant="permanent" anchor="left" PaperProps={{ style: paperStyles }}>
     {/* <List>{notesList}</List> */}
+    <NoteList />
     { currentProject ? <StyledAddIcon onClick={createNewNote}></StyledAddIcon> : '' }
     {/* <StyledAddIcon onClick={ currentProject ? createNewNote : () => console.log('PLease select a project to add')}/> */}
   </StyledSideBar>
+  );
+};
+
+const NoteList = () => {
+  return (
+    <List>
+      <ListItem>Notes go here</ListItem>
+    </List>
   );
 };
 
