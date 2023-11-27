@@ -13,8 +13,6 @@ const NotesList = ({ notes }) => {
     console.log('note should be deleted');
   };
 
-  console.log('note[0]: ', notes[0]);
-
   return (
   <List sx={{ width: '100%', maxWidth: 360, bgcolor: '#2C2C31' }}>
   {notes.map(note => (
@@ -31,7 +29,7 @@ const NotesList = ({ notes }) => {
       </>
     }>
     <ListItemText
-    primary={note.title}
+    primary={`${note.title} ${note.noteId}`}
     secondary={convertToReadableDate(note.lastEdited)}
     secondaryTypographyProps={{ color: 'rgba(255, 255, 255, .7)', fontWeight: 300 }}
     sx={{ bgcolor: '#2C2C31' }}/>

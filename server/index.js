@@ -152,7 +152,6 @@ app.post('/api/newNote/', (req, res, next) => {
   const { projectId } = req.body;
   const createdAt = new Date();
   const lastUpdate = new Date();
-  console.log('req body: ', req.body);
   const sql = `
   insert into "notes" ( "order", "project", "title", "data", "createdAt", "lastEdited")
          values ($1, $2, $3, $4, $5, $6)
@@ -165,7 +164,6 @@ app.post('/api/newNote/', (req, res, next) => {
     createdAt,
     lastUpdate ];
   db.query(sql, params).then(result => {
-    console.log('result: ', result.rows[0]);
     res.status(200).json({ savedNote: result.rows[0] });
   });
 });
