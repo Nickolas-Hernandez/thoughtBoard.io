@@ -10,7 +10,8 @@ export const AuthProvider = ({ children }) => {
     userDetails: null,
     userProjects: [],
     currentProject: null,
-    currentNotes: []
+    currentNotes: [],
+    selectedNote: null
   });
 
   useEffect(() => {
@@ -108,6 +109,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, [ auth.isLoggedIn, auth.currentProject ]);
 
+  const setSelectedNote = note => {
+    setAuth(prevState => ({
+      ...prevState,
+      selectedNote: note
+    }));
+  };
+
+  const unsetSelectedNote = () => {
+    setAuth(prevState => ({
+      ...prevState,
+      selectedNote: null
+    }));
+  };
+
   console.log('auth: ', auth);
 
   return (
@@ -117,7 +132,9 @@ export const AuthProvider = ({ children }) => {
       logout,
       setCurrentProject,
       appendNewProject,
-      appendNewNote
+      appendNewNote,
+      setSelectedNote,
+      unsetSelectedNote
     }}>
       {children}
     </AuthContext.Provider>
