@@ -3,14 +3,22 @@ import { List, ListItem, IconButton, ListItemText } from '@mui/material';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { convertToReadableDate } from '../../lib';
+import { useAuth } from '../../lib';
 
 const NotesList = ({ notes }) => {
-  const editNote = e => {
+  const { auth, setSelectedNote } = useAuth();
+  const { selectedNote } = auth;
+
+  const editNote = note => {
+    setSelectedNote(note);
     console.log('note is being editted');
+    console.log('clicked Note: ', note);
+    console.log('selected global note: ', selectedNote);
   };
 
-  const deleteNote = e => {
+  const deleteNote = note => {
     console.log('note should be deleted');
+    console.log('selectedNote: ', note);
   };
 
   return (
@@ -18,9 +26,13 @@ const NotesList = ({ notes }) => {
   {notes.map(note => (
     <ListItem
     key={note.noteId}
+    className='notes-list__note-item'
+    sx={{
+      background: selectedNote && (selectedNote.noteId === note.noteId) ? '#333339' : '#2C2C31'
+    }}
     secondaryAction={
       <>
-        <IconButton onClick={editNote} aria-label="edit">
+        <IconButton onClick={() => (editNote(note))} aria-label="edit">
           <EditNoteIcon sx={{ fill: 'white' }}/>
         </IconButton>
         <IconButton onClick={deleteNote} aria-label="delete">
@@ -32,7 +44,7 @@ const NotesList = ({ notes }) => {
     primary={`${note.title} ${note.noteId}`}
     secondary={convertToReadableDate(note.lastEdited)}
     secondaryTypographyProps={{ color: 'rgba(255, 255, 255, .7)', fontWeight: 300 }}
-    sx={{ bgcolor: '#2C2C31' }}/>
+    sx={{ bgcolor: selectedNote && (selectedNote.noteId === note.noteId) ? '#333339' : '#2C2C31' }}/>
     </ListItem>
   ))}
   </List>

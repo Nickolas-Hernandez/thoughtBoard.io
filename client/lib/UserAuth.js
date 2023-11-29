@@ -40,13 +40,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setAuth(prevState => ({
-      ...prevState,
-      isLoggedIn: false,
-      token: null
-    }));
-    localStorage.removeItem('token');
-    localStorage.removeItem('token_expiration');
     setAuth(() => ({
       isLoggedIn: false,
       token: null,
@@ -54,6 +47,8 @@ export const AuthProvider = ({ children }) => {
       userProjects: [],
       currentProject: null
     }));
+    localStorage.removeItem('token');
+    localStorage.removeItem('token_expiration');
   };
 
   useEffect(() => {
