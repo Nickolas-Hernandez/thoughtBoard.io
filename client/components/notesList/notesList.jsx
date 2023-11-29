@@ -11,9 +11,6 @@ const NotesList = ({ notes }) => {
 
   const editNote = note => {
     setSelectedNote(note);
-    console.log('note is being editted');
-    console.log('clicked Note: ', note);
-    console.log('selected global note: ', selectedNote);
   };
 
   const deleteNote = note => {
@@ -28,7 +25,8 @@ const NotesList = ({ notes }) => {
     key={note.noteId}
     className='notes-list__note-item'
     sx={{
-      background: selectedNote && (selectedNote.noteId === note.noteId) ? '#333339' : '#2C2C31'
+      background: selectedNote && (selectedNote.noteId === note.noteId) ? '#333339' : '#2C2C31',
+      borderRadius: '4px'
     }}
     secondaryAction={
       <>
