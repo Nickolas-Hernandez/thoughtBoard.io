@@ -19,9 +19,9 @@ const ThoughtBoard = () => {
   return (
     <>
       <HeaderSection />
-      <div style={{display: 'flex'}}>
+      <div style={{ display: 'flex' }}>
         <SideBar />
-        <NotePad />
+        <NotePad note={auth.selectedNote} />
       </div>
       <button onClick={handleLogout}>Logout</button>
     </>

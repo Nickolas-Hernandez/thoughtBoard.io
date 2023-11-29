@@ -2,8 +2,7 @@ import React from 'react';
 import { List, ListItem, IconButton, ListItemText } from '@mui/material';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { convertToReadableDate } from '../../lib';
-import { useAuth } from '../../lib';
+import { convertToReadableDate, useAuth } from '../../lib';
 
 const NotesList = ({ notes }) => {
   const { auth, setSelectedNote } = useAuth();
