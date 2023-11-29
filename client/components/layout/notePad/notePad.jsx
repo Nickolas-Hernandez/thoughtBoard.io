@@ -5,18 +5,18 @@ const NotePad = ({ note }) => {
 
   if (!note) {
     return (
-      <Box sx={{ width: '100%', backgroundColor: '#5a5a64', color: '#FAF9F6' }}>
+      <Box sx={{ width: '100%', backgroundColor: '#5a5a64', color: '#FAF9F6', padding: '15px' }}>
         <Typography>Please select a note.</Typography>
       </Box>
     );
   }
 
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#5a5a64', color: '#FAF9F6' }}>
-      <Typography variant='bod1'>Note id = { note.noteId }</Typography>
+    <Box sx={{ width: '100%', backgroundColor: '#5a5a64', color: '#FAF9F6', padding: '15px' }}>
       <Typography variant='h3'>Note Title: {note.title}</Typography>
+      <Typography variant='body1'>Last Edit: {note.lastEdited}</Typography>
+      <Typography variant='body1'>Note id = { note.noteId }</Typography>
       <Typography variant='body1'>Note Data: {note.data}</Typography>
-      <Typography variant='small'>Last Edit: {note.lastEdited}</Typography>
     </Box>
   );
 };
