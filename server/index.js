@@ -168,6 +168,41 @@ app.post('/api/newNote/', (req, res, next) => {
   });
 });
 
+app.delete('/api/notes/:noteId', (req, res, next) => {
+  const { noteId } = req.params;
+  console.log('NOTEID: ', noteId);
+  const sql = 'DELETE FROM notes WHERE id = $1';
+  console.log('sql: ', sql);
+  const params = [ noteId ];
+  db.query(sql, params).then(result => {
+    console.log('result: ', result.rows[0]);
+    res.status(200);
+  });
+});
+
+// app.delete('/api/notes/:noteId', async (req, res) => {
+//   const noteId = parseInt(req.params.noteId);
+
+//   if (isNaN(noteId)) {
+//     return res.status(400).send('Invalid noteId');
+//   }
+
+//   try {
+//     const result = await db.query('DELETE FROM notes WHERE noteId = $1', [noteId]);
+
+//     if (result.rowCount === 0) {
+//       return res.status(404).send('Note not found');
+//     }
+
+//     console.log('result: ', result.rows[0])
+
+//     res.status(200).send('Note deleted successfully');
+//   } catch (error) {
+//     console.error('Error deleting note:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

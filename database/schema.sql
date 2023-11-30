@@ -21,12 +21,12 @@ create table "projects" (
 );
 
 create table "notes" (
-  "noteId" serial,
+  "id" serial,
   "order" integer not null,
   "project" integer not null,
   "title" text not null,
   "data" text not null,
   "createdAt" text not null,
   "lastEdited" text not null,
-  primary key ("noteId")
+  primary key ("id")
 );

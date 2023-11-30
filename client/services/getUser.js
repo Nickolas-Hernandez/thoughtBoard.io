@@ -13,10 +13,10 @@ const getUser = async token => {
     }
 
     const userDetails = await response.json();
-    return userDetails; // This should be the user details object returned from the server
+    return userDetails;
   } catch (error) {
     console.error('Error fetching user details:', error);
-    throw error; // Re-throwing the error is important so the caller can handle it
+    throw error;
   }
 };
 
