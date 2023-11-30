@@ -14,8 +14,6 @@ const NotesList = ({ notes }) => {
   };
 
   const trashNote = note => {
-    console.log('note should be deleted');
-    console.log('selectedNote: ', note);
     deleteNote(note);
   };
 
