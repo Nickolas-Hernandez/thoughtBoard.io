@@ -188,7 +188,7 @@ app.delete('/api/notes/:noteId', async (req, res, next) => {
     res.status(200).send('Note deleted successfully');
 
   } catch (err) {
-    console.error('Error deleting note:', error);
+    console.error('Error deleting note:', err);
     res.status(500).send('Internal Server Error');
   }
 });
