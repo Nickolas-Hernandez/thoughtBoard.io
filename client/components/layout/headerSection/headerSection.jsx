@@ -7,7 +7,7 @@ import { useAuth } from '../../../lib';
 
 const HeaderSection = props => {
   const { auth } = useAuth();
-  const [ displayNewProjectForm, setDisplayNewProjectForm  ] = useState(false);
+  const [ displayNewProjectForm, setDisplayNewProjectForm ] = useState(false);
 
   const toggleProjectForm = e => {
     setDisplayNewProjectForm(!displayNewProjectForm);

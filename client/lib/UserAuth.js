@@ -118,8 +118,6 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-  console.log('auth: ', auth);
-
   return (
     <AuthContext.Provider value={{
       auth,

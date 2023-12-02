@@ -39,7 +39,6 @@ const ProjectSelector = props => {
           }
         }
         setCurrentProject(project);
-        // userContext.setProjectNotes(project);
       }}
       >
         { menuItems }
