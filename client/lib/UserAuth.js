@@ -118,6 +118,15 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
+  const removeNoteById = id => {
+    setAuth(prevState => ({
+      ...prevState,
+      currentNotes: prevState.currentNotes.filter(note => note.id !== id)
+    }));
+  };
+
+  console.log(auth);
+
   return (
     <AuthContext.Provider value={{
       auth,
@@ -127,7 +136,8 @@ export const AuthProvider = ({ children }) => {
       appendNewProject,
       appendNewNote,
       setSelectedNote,
-      unsetSelectedNote
+      unsetSelectedNote,
+      removeNoteById
     }}>
       {children}
     </AuthContext.Provider>

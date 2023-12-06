@@ -15,6 +15,7 @@ const NotesList = ({ notes }) => {
 
   const trashNote = note => {
     deleteNote(note);
+    console.log(note);
   };
 
   return (
