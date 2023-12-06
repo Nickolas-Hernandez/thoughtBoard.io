@@ -6,8 +6,9 @@ import { convertToReadableDate, useAuth } from '../../lib';
 import { deleteNote } from '../../services';
 
 const NotesList = ({ notes }) => {
-  const { auth, setSelectedNote } = useAuth();
+  const { auth, setSelectedNote, removeNoteById } = useAuth();
   const { selectedNote } = auth;
+  console.log(removeNoteById);
 
   const editNote = note => {
     setSelectedNote(note);
@@ -15,6 +16,7 @@ const NotesList = ({ notes }) => {
 
   const trashNote = note => {
     deleteNote(note);
+    removeNoteById(note.id);
   };
 
   return (
